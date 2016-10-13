@@ -94,7 +94,7 @@ with open('index.html', 'w') as file:
   for word in unfiltered_wordlist:
     color = get_word_color(clean_word_for_count(word),dictionary)
     if color == '000000':
-      file.write('<font color=#{}>{} </font>'.format(color,word))
+      file.write('{} '.format(word))
     else:
       file.write('<font color=#{}><b>{} </b></font>'.format(color,word))
   line1 = '</p>'
