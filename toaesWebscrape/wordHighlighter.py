@@ -22,7 +22,7 @@ def print_counter_words(counter, num):
 
 def filter_common_words(w):
   common_words = ['a', 'the', 'an', 'to', 'i', 'and', 'for', 'of', 'is', 'in', 'that', 'it', 'on', 'you',
-      'with','are','my','if']
+      'with','are','my','if','at','as','by','was','be','but','were','had']
   if w in common_words:
     return True
   else:
@@ -63,7 +63,7 @@ def get_color(r):
 
 def make_word_count_plot(dictionary):
   index=0
-  limit=60
+  limit=100
   x = list()
   y = list()
   for w in sorted(dictionary, key=dictionary.get, reverse=True):
@@ -80,36 +80,12 @@ def make_word_count_plot(dictionary):
   plt.xlabel('Words')
   plt.ylabel('Counts')
   plt.title('{} Most Common Words in Text'.format(str(limit)))
-  plt.xticks(index2 + bar_width, x, rotation=90)
+  plt.xticks(index2 + bar_width, x, rotation=90, fontsize=12)
   plt.tight_layout()
   plt.show()
 
-if __name__ == "__main__":
-  # Make the Dictionary with word counts
-  wordlist = []
-  unfiltered_wordlist=[]
-  for i in range(1,12):
-    url = "http://toaes.kyletolle.com/v4/ch" + str(i) + "/"
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, 'html5lib')
-    text = soup.get_text()
-    #print text
-    for word in text.strip().split():
-      unfiltered_wordlist.append(word)
-      if filter_common_words(word.lower()): 
-        continue
-      wordlist.append(clean_word_for_count(word))
-  
-  
-  dictionary = defaultdict(int)
-  for w in wordlist:
-    dictionary[w]+=1
-  
-  #make plot from dictionary
-  make_word_count_plot(dictionary)
-  
-  # make an html page that colors each word according to it's frequency
-  with open('index.html', 'w') as file:
+def make_html_output(page_name,unfiltered_wordlist,dictionary):
+ with open(page_name, 'w') as file:
     line1 = '<html lang="en">'
     line2 = '<head>'
     line3 = '<meta charset="utf-8">'
@@ -128,6 +104,36 @@ if __name__ == "__main__":
     line2 = '</body>'
     line3 = '</html>'
     file.write('\n{}\n{}\n{}'.format(line1,line2,line3))
+
+
+
+###################
+## Main Program
+###################
+
+if __name__ == "__main__":
+  # Make the Dictionary with word counts
+  wordlist = []
+  unfiltered_wordlist=[]
+  for i in range(1,12):
+    url = "http://toaes.kyletolle.com/v4/ch" + str(i) + "/"
+    html = requests.get(url).text
+    soup = BeautifulSoup(html, 'html5lib')
+    text = soup.get_text()
+    #print text
+    for word in text.strip().split():
+      unfiltered_wordlist.append(word)
+      if filter_common_words(word.lower()): 
+        continue
+      wordlist.append(clean_word_for_count(word))
   
+  dictionary = defaultdict(int)
+  for w in wordlist:
+    dictionary[w]+=1
+  
+  #make plot from dictionary
+  make_word_count_plot(dictionary)
+  make_html_output('index.html',unfiltered_wordlist,dictionary) 
+   
   
   
