@@ -66,7 +66,7 @@ def get_color(r):
 
 def make_word_count_plot(dictionary):
   index=0
-  limit=100
+  limit=60
   x = list()
   y = list()
   colors = list()
@@ -78,10 +78,11 @@ def make_word_count_plot(dictionary):
     if index >= limit: 
       break
   fig, ax = plt.subplots()
-  bar_width = 0.35
+  bar_width = 0.5
   opacity = 0.4
   index2 = np.arange(limit)
   rects1 = plt.bar(index2, y, bar_width, alpha=opacity, color=colors)
+  ax.set_aspect('auto')
   plt.xlabel('Words')
   plt.ylabel('Counts')
   plt.title('{} Most Common Words in Text'.format(str(limit)))
@@ -92,7 +93,8 @@ def make_word_count_plot(dictionary):
     ii = ii*10
     colors = '#'+get_color(0.05+il)
     ax.text(0.65,ypos,'Top {}% of Words'.format(ii),color=colors,transform = ax.transAxes)
-  plt.show()
+  #plt.show()
+  plt.savefig('wordCountPlot.png')
 
 def make_html_output(page_name,unfiltered_wordlist,dictionary):
  with open(page_name, 'w') as file:
@@ -101,8 +103,10 @@ def make_html_output(page_name,unfiltered_wordlist,dictionary):
     line3 = '<meta charset="utf-8">'
     line4 = '</head>'
     line5 = '<body>'
-    line6 = '<p>'
-    file.write('{}\n{}\n{}\n{}\n{}\n{}'.format(line1,line2,line3,line4,line5,line6))
+    line6 = '<h1>Word Count Analysis</h1>'
+    line7 = '<center><img src="wordCountPlot.png" alt="Work Count Plot"></center><br><br>'
+    line8 = '<p>'
+    file.write('{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}'.format(line1,line2,line3,line4,line5,line6,line7,line8))
   
     for word in unfiltered_wordlist:
       color = get_word_color(clean_word_for_count(word),dictionary)
