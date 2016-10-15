@@ -1,3 +1,6 @@
 *.*~
 *.pdf
 twitterAuthentication.txt
+toaesWebscrape/*.txt
+toaesWebscrape/*.html
+toaesWebscrape/*.pyc

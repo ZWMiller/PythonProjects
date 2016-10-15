@@ -62,7 +62,7 @@ def get_color(r):
   else:
     return '000000'
 
-def make_word_count_plot(dictionary,limit=60,filename,text_title='Text'):
+def make_word_count_plot(dictionary,filename,limit=60,text_title='Text'):
   index=0
   x = list()
   y = list()

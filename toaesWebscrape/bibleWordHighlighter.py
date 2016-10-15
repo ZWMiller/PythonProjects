@@ -38,7 +38,7 @@ if __name__ == "__main__":
   page_name = 'bibleIndex.html'
   image_name = 'bibleWordCountPlot.png'
   title_name = 'KJV Bible'
-  wcm.make_word_count_plot(dictionary,60,image_name,title_name)
+  wcm.make_word_count_plot(dictionary,image_name,60,title_name)
   wcm.make_html_output(page_name,image_name,unfiltered_wordlist,dictionary) 
    
   
