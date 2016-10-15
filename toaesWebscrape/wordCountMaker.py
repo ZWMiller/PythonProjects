@@ -27,6 +27,29 @@ def print_dictionary(dictionary,filename):
       for w in sorted(dictionary, key=dictionary.get, reverse=True):
         file.write(w + " " + str(dictionary[w])+ "\n")
 
+def get_dictionary(filename):
+  dictionary = {}
+  with open(filename, 'r') as f:
+    for line in f:
+      try: 
+        word, count = line.split()
+      except:
+        print "Bad Line, Skipping!\n"
+        continue
+      if is_number(word):
+        continue
+      dictionary[word] = int(count)
+  return dictionary
+
+def is_number(w):
+  try:
+    int(w)
+    float(w)
+    return True
+  except ValueError:
+    return False
+
+
 def get_word_count_ratio(word, dictionary):
   return float(float(dictionary[word])/float(get_max_counts_in_dictionary(dictionary)))
 
