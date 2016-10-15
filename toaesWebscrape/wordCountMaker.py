@@ -124,7 +124,7 @@ def make_html_output(page_name,image_name,unfiltered_wordlist,dictionary):
     line4 = '</head>'
     line5 = '<body>'
     line6 = '<h1>Word Count Analysis</h1>'
-    line7 = '<center><img src="'+ image_name +'" alt="Work Count Plot"></center><br><br>'
+    line7 = '<center><img src="'+ image_name +'" alt="Word Count Plot"></center><br><br>'
     line8 = '<p>'
     file.write('{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}'.format(line1,line2,line3,line4,line5,line6,line7,line8))
   
