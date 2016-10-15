@@ -37,7 +37,7 @@ if __name__ == "__main__":
   for w in wordlist:
     dictionary[w]+=1
 
-  wcm.print_dictionary(dictionary,'toaesDictionary.txt') # sys prints to temrinal, "filename" prints to file
+  wcm.print_dictionary(dictionary,'dictionaries/toaesDictionary.txt') # sys prints to temrinal, "filename" prints to file
   
   #make plot from dictionary
   page_name = 'html/toaesIndex.html'

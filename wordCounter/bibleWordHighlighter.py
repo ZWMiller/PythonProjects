@@ -32,7 +32,7 @@ if __name__ == "__main__":
   for w in wordlist:
     dictionary[w]+=1
 
-  wcm.print_dictionary(dictionary,'bibleDictionary.txt') #DEBUG
+  wcm.print_dictionary(dictionary,'dictionaries/bibleDictionary.txt') #DEBUG
   
   #make plot from dictionary
   page_name = 'bibleIndex.html'

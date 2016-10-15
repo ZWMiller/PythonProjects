@@ -16,8 +16,9 @@ sys.setdefaultencoding('utf-8')
 
 if __name__ == "__main__":
 
-  dictionary = wcm.get_dictionary('bibleDictionary.txt')
-  wcm.print_dictionary(dictionary,'bibleDictionary.txt') #DEBUG
+# Filters out numeric strings from the count to remove verse numbers
+  dictionary = wcm.get_dictionary('dictionaries/bibleDictionary.txt')
+  wcm.print_dictionary(dictionary,'dictionaries/bibleDictionary.txt') #DEBUG
   
   #make plot from dictionary
   page_name = 'bibleIndex.html'
