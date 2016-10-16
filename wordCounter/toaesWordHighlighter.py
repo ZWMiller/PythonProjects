@@ -33,10 +33,7 @@ if __name__ == "__main__":
         wordlist.append(wcm.clean_word_for_count(word))
     unfiltered_wordlist.append('<br><br>')
   
-  dictionary = defaultdict(int)
-  for w in wordlist:
-    dictionary[w]+=1
-
+  dictionary = wcm.make_dictionary_from_wordlist(wordlist)
   wcm.print_dictionary(dictionary,'dictionaries/toaesDictionary.txt') # sys prints to temrinal, "filename" prints to file
   
   #make plot from dictionary

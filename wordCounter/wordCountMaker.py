@@ -1,4 +1,5 @@
 import numpy as np
+from collections import defaultdict
 import matplotlib.pyplot as plt
 import string
 
@@ -26,6 +27,12 @@ def print_dictionary(dictionary,filename):
     with open(filename, 'w') as file:
       for w in sorted(dictionary, key=dictionary.get, reverse=True):
         file.write(w + " " + str(dictionary[w])+ "\n")
+
+def make_dictionary_from_wordlist(wordlist):
+  dictionary = defaultdict(int)
+  for w in wordlist:
+    dictionary[w]+=1
+  return dictionary
 
 def get_dictionary(filename):
   dictionary = {}

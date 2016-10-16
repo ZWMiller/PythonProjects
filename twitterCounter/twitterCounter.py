@@ -73,11 +73,7 @@ else:
   print "To use #, you must wrap the phrase in ''"
   sys.exit(1)
 
-
-dictionary = defaultdict(int)
-for w in topicwords:
-  dictionary[w]+=1
-
+dictionary = wcm.make_dictionary_from_wordlist(wordlist)
 dictionary_path = 'dictionaries/' + topic + '.txt'
 wcm.print_dictionary(dictionary,dictionary_path) # sys prints to temrinal, "filename" prints to file
 
