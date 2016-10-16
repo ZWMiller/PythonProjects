@@ -36,10 +36,16 @@ def get_dictionary(filename):
       except:
         print "Bad Line, Skipping!\n"
         continue
-      if is_number(word):
-        continue
       dictionary[word] = int(count)
   return dictionary
+
+def filter_numbers_from_dictionary(dictionary):
+  dictionary2 = {}
+  for w in sorted(dictionary, key=dictionary.get, reverse=True):
+    if is_number(w):
+      continue
+    dictionary2[w] = dictionary[w]
+  dictionary = dictionary2
 
 def is_number(w):
   try:
@@ -114,17 +120,17 @@ def make_word_count_plot(dictionary,filename,limit=60,text_title='Text'):
     colors = '#'+get_color(0.05+il)
     ax.text(0.65,ypos,'Top {}% of Words'.format(ii),color=colors,transform = ax.transAxes)
   #plt.show()
-  plt.savefig(filename)
+  plt.savefig('img/'+filename)
 
 def make_html_output(page_name,image_name,unfiltered_wordlist,dictionary):
- with open(page_name, 'w') as file:
+ with open('html/'+page_name, 'w') as file:
     line1 = '<html lang="en">'
     line2 = '<head>'
     line3 = '<meta charset="utf-8">'
     line4 = '</head>'
     line5 = '<body>'
     line6 = '<h1>Word Count Analysis</h1>'
-    line7 = '<center><img src="'+ image_name +'" alt="Word Count Plot"></center><br><br>'
+    line7 = '<center><img src="../img/'+ image_name +'" alt="Word Count Plot"></center><br><br>'
     line8 = '<p>'
     file.write('{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}'.format(line1,line2,line3,line4,line5,line6,line7,line8))
   

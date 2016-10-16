@@ -18,6 +18,7 @@ if __name__ == "__main__":
 
 # Filters out numeric strings from the count to remove verse numbers
   dictionary = wcm.get_dictionary('dictionaries/bibleDictionary.txt')
+  wcm.filter_numbers_from_dictionary(dictionary)
   wcm.print_dictionary(dictionary,'dictionaries/bibleDictionary.txt') #DEBUG
   
   #make plot from dictionary

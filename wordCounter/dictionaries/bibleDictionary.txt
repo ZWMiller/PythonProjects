@@ -928,10 +928,10 @@ troubled 68
 led 68
 was 68
 abundance 68
-upright 68
 secret 68
 cup 68
 worthy 68
+upright 68
 consider 67
 grave 67
 arm 67
@@ -1671,10 +1671,10 @@ greatness 32
 inhabited 32
 jew 32
 caleb 32
-reap 32
 feasts 32
 repented 32
 shittim 32
+reap 32
 causeth 32
 shine 32
 wave 32
@@ -3040,7 +3040,6 @@ ephron 13
 ivory 13
 wist 13
 hermon 13
-chapiter 13
 diseases 13
 fashion 13
 laughed 13
@@ -3067,6 +3066,7 @@ profitable 13
 abinadab 13
 inclined 13
 giants 13
+chapiter 13
 martha 13
 silas 13
 sufficient 13
@@ -3316,6 +3316,7 @@ zelophehad 11
 gathering 11
 eighteenth 11
 beforetime 11
+scorner 11
 wifes 11
 paran 11
 robbers 11
@@ -3326,7 +3327,6 @@ paragraph 11
 morter 11
 achaia 11
 heirs 11
-scorner 11
 hart 11
 wither 11
 ruin 11
@@ -5237,6 +5237,7 @@ elizur 5
 esteem 5
 draught 5
 mischievous 5
+adulteries 5
 dodo 5
 upside 5
 swarest 5
@@ -5341,7 +5342,6 @@ parlour 5
 looks 5
 emerald 5
 pisgah 5
-adulteries 5
 spikenard 5
 sidonians 5
 deceiver 5
@@ -5465,6 +5465,7 @@ abased 4
 fainteth 4
 loathsome 4
 upholdeth 4
+lady 4
 format 4
 plumbline 4
 smiths 4
@@ -5604,7 +5605,6 @@ shamefully 4
 resort 4
 heels 4
 edification 4
-lady 4
 rear 4
 idumea 4
 knocketh 4
@@ -5746,6 +5746,7 @@ girt 4
 undersetters 4
 accepteth 4
 husham 4
+forbidding 4
 shod 4
 oboth 4
 stormy 4
@@ -5981,7 +5982,6 @@ swiftly 4
 lendeth 4
 wonderfully 4
 raisins 4
-forbidding 4
 bell 4
 chephirah 4
 sanctifieth 4
@@ -7197,7 +7197,6 @@ evidently 2
 zemarite 2
 hillel 2
 ahihud 2
-wronged 2
 cursedst 2
 instantly 2
 zibiah 2
@@ -7216,13 +7215,12 @@ overtaken 2
 exacted 2
 locations 2
 ribai 2
-warriors 2
+wronged 2
 knead 2
 massa 2
 altered 2
 discerning 2
 buffet 2
-boys 2
 chilion 2
 babbler 2
 gahar 2
@@ -7340,6 +7338,7 @@ plat 2
 accepting 2
 unequal 2
 defended 2
+purity 2
 philemon 2
 writer 2
 unjustly 2
@@ -7384,7 +7383,6 @@ harodite 2
 misrephothmaim 2
 huldah 2
 pale 2
-abimelechs 2
 envyings 2
 concealed 2
 tidal 2
@@ -7644,7 +7642,7 @@ joktheel 2
 barbarians 2
 jehozadak 2
 sheepcote 2
-purity 2
+abimelechs 2
 waxeth 2
 bethmarcaboth 2
 searchest 2
@@ -7880,7 +7878,6 @@ wizard 2
 unquenchable 2
 achim 2
 geshuri 2
-mehetabel 2
 bears 2
 durable 2
 selfwilled 2
@@ -7947,6 +7944,7 @@ kisses 2
 forsookest 2
 sharply 2
 morasthite 2
+nearer 2
 wellpleasing 2
 writest 2
 hymenaeus 2
@@ -8044,6 +8042,7 @@ meshillemoth 2
 mikneiah 2
 sallai 2
 does 2
+warriors 2
 sporting 2
 bithynia 2
 becamest 2
@@ -8059,7 +8058,7 @@ shochoh 2
 flourished 2
 keros 2
 ribs 2
-craftsman 2
+mehetabel 2
 intellectual 2
 naphtuhim 2
 lieu 2
@@ -8074,6 +8073,7 @@ vermilion 2
 weigheth 2
 string 2
 advised 2
+tabitha 2
 gilonite 2
 conversant 2
 odour 2
@@ -8297,7 +8297,7 @@ ananiah 2
 alush 2
 corrupters 2
 baladan 2
-tabitha 2
+boys 2
 constant 2
 specified 2
 possessor 2
@@ -8506,6 +8506,7 @@ watchings 2
 shalmaneser 2
 onesimus 2
 choke 2
+craftsman 2
 mallothi 2
 doorkeepers 2
 concealeth 2
@@ -8537,7 +8538,7 @@ talketh 2
 ahiam 2
 tabbaoth 2
 hymn 2
-nearer 2
+partners 2
 sacar 2
 cornets 2
 requited 2
@@ -8663,7 +8664,6 @@ friendship 2
 stilled 2
 hobab 2
 enshemesh 2
-partners 2
 awakest 2
 appearances 2
 roofs 2
@@ -8858,7 +8858,6 @@ exorcists 1
 shihor 1
 deserveth 1
 shammuah 1
-rouse 1
 taanathshiloh 1
 meadows 1
 hough 1
@@ -8897,7 +8896,6 @@ woundedst 1
 clifts 1
 reverenced 1
 skilfully 1
-snuffeth 1
 fatling 1
 paperwork 1
 addar 1
@@ -9030,7 +9028,6 @@ janoah 1
 adventured 1
 fishhooks 1
 jehovahshalom 1
-inaccurate 1
 amam 1
 tarea 1
 suah 1
@@ -9067,6 +9064,7 @@ ezem 1
 gaddi 1
 fellowprisoners 1
 gabbatha 1
+sarsechim 1
 achaicus 1
 calfs 1
 gathhepher 1
@@ -9141,7 +9139,7 @@ jeshanah 1
 lengthened 1
 maintainest 1
 nymphas 1
-deferreth 1
+shibboleth 1
 wreath 1
 oliveyard 1
 crackling 1
@@ -9190,6 +9188,7 @@ meddled 1
 imna 1
 groaned 1
 swollen 1
+garlands 1
 hazarsusim 1
 confectionaries 1
 unsolicited 1
@@ -9205,7 +9204,7 @@ nehushta 1
 maintaining 1
 repairer 1
 revilers 1
-marsena 1
+leather 1
 orphans 1
 beetle 1
 prudently 1
@@ -9252,7 +9251,6 @@ senators 1
 berachiah 1
 bewaileth 1
 foresaw 1
-conquerors 1
 aruboth 1
 peeped 1
 wilfully 1
@@ -9286,7 +9284,7 @@ crownest 1
 dimnah 1
 manaen 1
 imrah 1
-gaham 1
+yelled 1
 fix 1
 ants 1
 phlegon 1
@@ -9302,7 +9300,6 @@ manslayers 1
 admatha 1
 sparkled 1
 lanes 1
-felloes 1
 netophathi 1
 felling 1
 exerciseth 1
@@ -9350,8 +9347,9 @@ thamah 1
 nibshan 1
 palluites 1
 brigandines 1
-reigning 1
+zophim 1
 revenges 1
+gispa 1
 eglaim 1
 revenged 1
 evangelists 1
@@ -9376,7 +9374,6 @@ pluckt 1
 gederite 1
 abused 1
 darken 1
-garlands 1
 aiath 1
 severally 1
 hadattah 1
@@ -9404,6 +9401,7 @@ ahumai 1
 joelah 1
 ziphron 1
 laughing 1
+takes 1
 bimhal 1
 temani 1
 interpreting 1
@@ -9438,7 +9436,6 @@ cumbereth 1
 gorgeous 1
 bilgai 1
 jealousies 1
-lordly 1
 tiberius 1
 knocked 1
 ishmeelite 1
@@ -9607,7 +9604,6 @@ goblet 1
 valuest 1
 sherezer 1
 martyrs 1
-tire 1
 methods 1
 senate 1
 sighs 1
@@ -9632,7 +9628,7 @@ striven 1
 harnessed 1
 strived 1
 elbethel 1
-hammoleketh 1
+felloes 1
 naashon 1
 spat 1
 restrainest 1
@@ -9640,12 +9636,11 @@ pastor 1
 zephathah 1
 stillest 1
 charmed 1
-meshillemith 1
 moabitish 1
 slidden 1
 cis 1
 ituraea 1
-yelled 1
+tahanites 1
 rolling 1
 wove 1
 codes 1
@@ -9670,7 +9665,7 @@ misham 1
 munitions 1
 puhites 1
 shivers 1
-arelites 1
+snuffeth 1
 bizjothjah 1
 aground 1
 timnathheres 1
@@ -9753,14 +9748,13 @@ minding 1
 1e2 1
 1e5 1
 jesui 1
-discourage 1
 demonstration 1
 jehovahjireh 1
 stealth 1
 shage 1
 shameth 1
 hannathon 1
-travelled 1
+meshillemith 1
 painful 1
 accompany 1
 hashupha 1
@@ -9798,7 +9792,7 @@ entertain 1
 sherds 1
 iru 1
 gilalai 1
-burnished 1
+rouse 1
 whisperers 1
 jah 1
 wretchedness 1
@@ -9886,7 +9880,6 @@ princesses 1
 barjesus 1
 leadest 1
 girgashite 1
-shitrai 1
 hiel 1
 httppglaforgdonate 1
 tikvath 1
@@ -9946,7 +9939,6 @@ maralah 1
 occasioned 1
 betah 1
 planters 1
-disclaimers 1
 disk 1
 ispah 1
 naarai 1
@@ -9974,7 +9966,6 @@ tentmakers 1
 zaphon 1
 mightiest 1
 main 1
-modification 1
 handkerchiefs 1
 shemidah 1
 peresh 1
@@ -10033,7 +10024,6 @@ recovering 1
 blaze 1
 flayed 1
 prevailest 1
-hungerbitten 1
 oppose 1
 gittahhepher 1
 imprisonments 1
@@ -10042,7 +10032,6 @@ enhazor 1
 irpeel 1
 blossomed 1
 hazel 1
-lamentable 1
 shooters 1
 bulrush 1
 repayed 1
@@ -10050,6 +10039,7 @@ jeremiahs 1
 hazaiah 1
 palestine 1
 backslider 1
+travelled 1
 lucas 1
 amphipolis 1
 seated 1
@@ -10152,6 +10142,7 @@ jesuites 1
 arab 1
 bastards 1
 mocker 1
+jahdo 1
 thrusteth 1
 fellowcitizens 1
 salim 1
@@ -10162,7 +10153,6 @@ eleph 1
 ahian 1
 shihon 1
 changeable 1
-jesurun 1
 divinations 1
 dined 1
 malchus 1
@@ -10171,7 +10161,6 @@ sparing 1
 rendering 1
 mathusala 1
 strangely 1
-eshtemoh 1
 wailed 1
 nodab 1
 calcol 1
@@ -10182,9 +10171,7 @@ hara 1
 sundry 1
 chalcol 1
 shephi 1
-garnish 1
 nebai 1
-sticketh 1
 maximum 1
 familiars 1
 resen 1
@@ -10221,11 +10208,13 @@ cursings 1
 mahol 1
 helkathhazzurim 1
 disclaim 1
+burnished 1
 rifled 1
 renderest 1
 shaked 1
+wondrously 1
 shallecheth 1
-shenazar 1
+sticketh 1
 wraths 1
 headstone 1
 bishoprick 1
@@ -10243,6 +10232,7 @@ laud 1
 cab 1
 charashim 1
 occur 1
+716 1
 croucheth 1
 apelles 1
 vomited 1
@@ -10255,7 +10245,7 @@ ribband 1
 goad 1
 horite 1
 freckled 1
-decreased 1
+conquerors 1
 inflicted 1
 bethmeon 1
 nod 1
@@ -10309,7 +10299,6 @@ rabbith 1
 ishmerai 1
 snout 1
 ramath 1
-hamors 1
 swelled 1
 omitted 1
 machnadebai 1
@@ -10336,7 +10325,6 @@ gutter 1
 elected 1
 reumah 1
 hypocrisies 1
-respecter 1
 tackling 1
 atonements 1
 justifier 1
@@ -10372,14 +10360,14 @@ signification 1
 japhleti 1
 slimepits 1
 aphik 1
-jahdo 1
+gaham 1
 mite 1
 plucketh 1
 angered 1
 lothing 1
 closest 1
 foam 1
-pglaf 1
+reigning 1
 cymbal 1
 respected 1
 traps 1
@@ -10390,6 +10378,7 @@ wintered 1
 enticeth 1
 eluzai 1
 sweeping 1
+jerioth 1
 nemuelites 1
 treatment 1
 bethelite 1
@@ -10397,7 +10386,6 @@ repetitions 1
 salutations 1
 makes 1
 execution 1
-threaten 1
 ambushes 1
 newborn 1
 nedabiah 1
@@ -10472,7 +10460,7 @@ litters 1
 astaroth 1
 venomous 1
 hareph 1
-unweighed 1
+disclaimers 1
 loseth 1
 deadness 1
 tabeel 1
@@ -10483,7 +10471,7 @@ beninu 1
 tanach 1
 parmashta 1
 taker 1
-takes 1
+respecter 1
 zabbud 1
 chestnut 1
 quickening 1
@@ -10520,7 +10508,7 @@ finer 1
 birsha 1
 worthies 1
 bethazmaveth 1
-wondrously 1
+pglaf 1
 adams 1
 desperately 1
 imprisoned 1
@@ -10541,6 +10529,7 @@ fellowhelpers 1
 blotteth 1
 outrun 1
 gardener 1
+decreased 1
 toiling 1
 pua 1
 nourisheth 1
@@ -10616,10 +10605,10 @@ linus 1
 izehar 1
 timnite 1
 blueness 1
-aija 1
+threaten 1
 lahad 1
 waterspouts 1
-lodgings 1
+jesurun 1
 bidding 1
 furrow 1
 zaza 1
@@ -10630,7 +10619,7 @@ eliadah 1
 instructers 1
 neesings 1
 motheaten 1
-settlest 1
+modification 1
 clearness 1
 pleadings 1
 lid 1
@@ -10672,7 +10661,6 @@ ensue 1
 leeks 1
 zavan 1
 opposed 1
-jaresiah 1
 inclose 1
 ceremonies 1
 izrahite 1
@@ -10726,10 +10714,8 @@ banquetings 1
 zebudah 1
 experiment 1
 geliloth 1
-zophim 1
 commercial 1
 shobek 1
-ceiling 1
 chant 1
 morsels 1
 abelmaim 1
@@ -10774,7 +10760,7 @@ eunice 1
 repayeth 1
 jaala 1
 averse 1
-jezliah 1
+lordly 1
 aridai 1
 sceptres 1
 hareth 1
@@ -10851,7 +10837,7 @@ akan 1
 halting 1
 purifications 1
 babbling 1
-godfor 1
+tire 1
 brayed 1
 baser 1
 mortality 1
@@ -10871,6 +10857,7 @@ hasenuah 1
 badness 1
 buckets 1
 swearers 1
+marsena 1
 poorer 1
 sixtyfold 1
 apphia 1
@@ -10928,12 +10915,11 @@ sleight 1
 library 1
 dekar 1
 kettle 1
-polishing 1
 allegory 1
 bloodguiltiness 1
 mainsail 1
 fretted 1
-melatiah 1
+inaccurate 1
 birzavith 1
 mekonah 1
 shocho 1
@@ -11039,9 +11025,9 @@ determinate 1
 profits 1
 zeror 1
 palsies 1
-sarsechim 1
+donors 1
 shimi 1
-gederothaim 1
+settlest 1
 hazarhatticon 1
 hoarfrost 1
 arodi 1
@@ -11083,10 +11069,9 @@ gibbar 1
 cornfloor 1
 cruelly 1
 kirjath 1
-gispa 1
+jaresiah 1
 silla 1
 eshtaulites 1
-igdaliah 1
 deserving 1
 pointed 1
 ichabod 1
@@ -11094,6 +11079,7 @@ dressers 1
 sleeper 1
 hoods 1
 citizens 1
+philosophy 1
 zamzummims 1
 elihoreph 1
 breakings 1
@@ -11162,7 +11148,7 @@ sap 1
 advocate 1
 differing 1
 eleloheisrael 1
-hazerim 1
+hungerbitten 1
 ishmaelite 1
 stiffened 1
 rephah 1
@@ -11244,7 +11230,6 @@ beggarly 1
 singeth 1
 zebina 1
 cupbearer 1
-governments 1
 shoa 1
 jehucal 1
 igeal 1
@@ -11438,6 +11423,7 @@ yokefellow 1
 voluntarily 1
 adami 1
 naam 1
+shenazar 1
 thongs 1
 slandereth 1
 critical 1
@@ -11470,6 +11456,7 @@ ahishahar 1
 melchiah 1
 deer 1
 tedious 1
+godfor 1
 onethe 1
 waxing 1
 migdalgad 1
@@ -11502,6 +11489,7 @@ eznite 1
 plainness 1
 syracuse 1
 awayyou 1
+contemneth 1
 judith 1
 higgaion 1
 bartimaeus 1
@@ -11543,7 +11531,6 @@ ahimoth 1
 traffickers 1
 baale 1
 jethlah 1
-donors 1
 amrams 1
 profiting 1
 unclothed 1
@@ -11583,6 +11570,7 @@ jagur 1
 tenderness 1
 karnaim 1
 childish 1
+bribery 1
 emmor 1
 succourer 1
 manifestly 1
@@ -11606,12 +11594,12 @@ madmen 1
 eyesalve 1
 hadlai 1
 stirs 1
-orginally 1
+polishing 1
 jibsam 1
 pildash 1
 maalehacrabbim 1
 ditches 1
-belaites 1
+ceiling 1
 agee 1
 private 1
 hamonah 1
@@ -11778,9 +11766,10 @@ therin 1
 maul 1
 native 1
 ophni 1
+unweighed 1
 euroclydon 1
 paarai 1
-philosophy 1
+igdaliah 1
 impenitent 1
 leisure 1
 pleasantness 1
@@ -11824,7 +11813,7 @@ stingeth 1
 sadly 1
 haruz 1
 ramathmizpeh 1
-muttered 1
+lamentable 1
 hale 1
 hagab 1
 harum 1
@@ -11850,9 +11839,9 @@ costliness 1
 hali 1
 corrupteth 1
 hermas 1
-contemneth 1
+lodgings 1
 masts 1
-wounding 1
+eshtemoh 1
 sippai 1
 payment 1
 jamlech 1
@@ -11964,7 +11953,6 @@ wittingly 1
 marched 1
 adorneth 1
 overcharged 1
-conference 1
 azotus 1
 bazluth 1
 nazarene 1
@@ -12011,7 +11999,6 @@ dagons 1
 betharbel 1
 christians 1
 sinim 1
-leather 1
 original 1
 tyrannus 1
 exacteth 1
@@ -12020,6 +12007,7 @@ shaulites 1
 havock 1
 hats 1
 mitylene 1
+jeezer 1
 poorest 1
 omnipotent 1
 abiasaph 1
@@ -12098,6 +12086,7 @@ conaniah 1
 seatward 1
 havens 1
 thoughtest 1
+aija 1
 stinking 1
 handywork 1
 herald 1
@@ -12199,7 +12188,7 @@ confidences 1
 shebarim 1
 affectionately 1
 maleleel 1
-tahanites 1
+conference 1
 nergal 1
 executest 1
 expected 1
@@ -12255,7 +12244,7 @@ ishmaels 1
 gimzo 1
 adria 1
 jotbah 1
-proceeding 1
+discourage 1
 renamed 1
 semachiah 1
 incontinency 1
@@ -12290,7 +12279,7 @@ toah 1
 nimrah 1
 nebushasban 1
 ridges 1
-discharge 1
+proceeding 1
 phalti 1
 favourest 1
 invent 1
@@ -12319,7 +12308,7 @@ stomachs 1
 troubledst 1
 lawless 1
 hushah 1
-bribery 1
+melatiah 1
 diblaim 1
 seneh 1
 fanners 1
@@ -12418,7 +12407,7 @@ jeshebeab 1
 urge 1
 kirjathhuzoth 1
 atroth 1
-shibboleth 1
+hamors 1
 tend 1
 trow 1
 jona 1
@@ -12463,6 +12452,7 @@ berothai 1
 vilely 1
 direction 1
 indirect 1
+hammoleketh 1
 gesham 1
 fiercer 1
 overtaketh 1
@@ -12484,6 +12474,7 @@ compound 1
 lavish 1
 increasest 1
 dalmatia 1
+wounding 1
 bealiah 1
 reformed 1
 raamses 1
@@ -12511,6 +12502,7 @@ tributary 1
 adders 1
 troublest 1
 forewarn 1
+discharge 1
 buds 1
 strict 1
 remembrances 1
@@ -12533,10 +12525,11 @@ tahapanes 1
 pineth 1
 deserve 1
 besom 1
+gederothaim 1
 withdrawest 1
 cypress 1
 includes 1
-ramathaimzophim 1
+shitrai 1
 emboldeneth 1
 bethcar 1
 bamothbaal 1
@@ -12573,7 +12566,7 @@ fouledst 1
 ordereth 1
 mnason 1
 hermes 1
-harnepher 1
+garnish 1
 tibhath 1
 flag 1
 presumed 1
@@ -12664,6 +12657,7 @@ rechah 1
 sarais 1
 uniform 1
 painfulness 1
+harnepher 1
 seedtime 1
 anvil 1
 justle 1
@@ -12695,6 +12689,7 @@ ignominy 1
 sluices 1
 remphan 1
 chalcedony 1
+arelites 1
 weasel 1
 meteyard 1
 appears 1
@@ -12703,6 +12698,7 @@ pg 1
 salchah 1
 conformable 1
 flinty 1
+belaites 1
 baalshalisha 1
 overrunning 1
 instructor 1
@@ -12761,6 +12757,7 @@ coppersmith 1
 defaming 1
 sceva 1
 handles 1
+hazerim 1
 mantles 1
 sections 1
 plunge 1
@@ -12839,6 +12836,7 @@ recount 1
 chozeba 1
 avim 1
 tizite 1
+governments 1
 feebleminded 1
 abstinence 1
 proprietary 1
@@ -12872,10 +12870,11 @@ keziz 1
 envieth 1
 gatherest 1
 jehizkiah 1
+muttered 1
 beerlahairoi 1
 disappointeth 1
 semei 1
-jeezer 1
+orginally 1
 dibri 1
 produced 1
 pison 1
@@ -12937,6 +12936,7 @@ bellies 1
 huz 1
 tammuz 1
 winnoweth 1
+ramathaimzophim 1
 naum 1
 jecamiah 1
 shedding 1
@@ -12981,7 +12981,7 @@ crisping 1
 slave 1
 jemima 1
 outcast 1
-jerioth 1
+deferreth 1
 collar 1
 warming 1
 edition 1
@@ -13044,6 +13044,7 @@ zephon 1
 avoided 1
 incredible 1
 battlements 1
+jezliah 1
 conclusion 1
 nourishment 1
 clift 1

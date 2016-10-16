@@ -40,8 +40,8 @@ if __name__ == "__main__":
   wcm.print_dictionary(dictionary,'dictionaries/toaesDictionary.txt') # sys prints to temrinal, "filename" prints to file
   
   #make plot from dictionary
-  page_name = 'html/toaesIndex.html'
-  image_name = 'img/toaesWordCountPlot.png'
+  page_name = 'toaesIndex.html'
+  image_name = 'toaesWordCountPlot.png'
   title_name = 'ToaES v4'
   wcm.make_word_count_plot(dictionary,image_name,60,title_name)
   wcm.make_html_output(page_name,image_name,unfiltered_wordlist,dictionary) 
