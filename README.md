@@ -39,3 +39,7 @@ left as black and unbolded, so that there is a contrast. All words that are in t
 (N is set in the plot making function as "limit"). This also makes a plot of the words and their counts and places it in the HTML page. The most common words in the King James Version of the Bible available in project Guttenburg is shown below.
 
 ![60 Most Common Words in KJV](wordCounter/img/bibleWordCountPlot.png)
+
+## MLB Database Analyzer
+
+This code loads in a CSV from http://www.seanlahman.com/baseball-archive/statistics/ that contains stats from all years of the MLB. The code makes nested dictionaries for each player by the year of their stats. So for Jim Bob, there is one dictionary made of sub-dictionaries for each year of stats. So stats['jimbob'][2009] would return a dictionary of Jim Bob's stats from 2009. The code also santizes the inputs, replacing all missing data with -999 so these missing values can be easily checked and removed from future analyses.
