@@ -5,3 +5,4 @@ toaesWebscrape/*.txt
 toaesWebscrape/*.html
 toaesWebscrape/*.pyc
 MLBAnalysis/baseballDatabank/*
+MLBAnalysis/img/*
