@@ -77,6 +77,7 @@ def add_personal_info_to_dictionary(d):
       for player in d:
           if player == playerID:
             d[player].update( {"firstName": nameFirst, "lastName": nameLast, "birthYear": birthYear} )
+            break
 
 def add_hall_of_fame_to_dictionary(d):
   with open('baseballDatabank/HallOfFame.csv','r') as f:
@@ -103,6 +104,7 @@ def add_hall_of_fame_to_dictionary(d):
         if player == playerID:
           if inducted == "y":
             d[player].update( {"HOF": 1,} )
+            break
   for player in d:
     if "HOF" not in d[player]:
       d[player].update( {"HOF": 0,} )
