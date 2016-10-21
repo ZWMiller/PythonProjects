@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 import matplotlib.pyplot as plt
+import sys
 
 def get_mlb_data_from_csv(): 
   stat_dictionary = {}
@@ -52,6 +53,64 @@ def get_mlb_data_from_csv():
       }
   return stat_dictionary
 
+def add_personal_info_to_dictionary(d):
+  with open('baseballDatabank/Master.csv','r') as f:
+    skipFirstLine = True
+    reader = csv.reader(f)
+    for row in reader:
+      line2 = []
+      if skipFirstLine:
+        skipFirstLine = False
+        continue
+      try:
+        for i, x in enumerate(row):
+          if len(x.strip())< 1:
+            x = row[i] = '-999'
+          line2.append(str(x))
+        playerID, birthYear, birthMonth, birthDay, birthCountry, birthState, birthCity, deathYear, deathMonth, deathDay, deathCountry, deathState, deathCity, nameFirst, nameLast, nameGiven, weight, height, bats, throws, debut, finalGame, retroID, bbrefID = line2
+      except:
+        print "Bad Line, Skipping!\n"
+        print "Unexpected error:", sys.exc_info()[0]
+        continue
+      playerID = playerID.lower()
+      birthYear = int(birthYear)
+      for player in d:
+        for year in d[player]:
+          if player == playerID:
+            age = year - birthYear
+            d[player][year].update( {"firstName": nameFirst, "lastName": nameLast, "AGE": age} )
+
+def add_hall_of_fame_to_dictionary(d):
+  with open('baseballDatabank/HallOfFame.csv','r') as f:
+    skipFirstLine = True
+    reader = csv.reader(f)
+    for row in reader:
+      line2 = []
+      if skipFirstLine:
+        skipFirstLine = False
+        continue
+      try:
+        for i, x in enumerate(row):
+          if len(x.strip())< 1:
+            x = row[i] = '-999'
+          line2.append(str(x))
+        playerID, yearid, votedBy, ballots, needed, votes, inducted, category, needed_note = line2
+      except:
+        print "Bad Line, Skipping!\n"
+        print "Unexpected error:", sys.exc_info()[0]
+        continue
+      playerID = playerID.lower()
+      inducted = inducted.lower()
+      for player in d:
+        for year in d[player]:
+          if player == playerID:
+            if inducted == "y":
+              d[player][year].update( {"HOF": 1,} )
+  for player in d:
+    for year in d[player]:
+      if "HOF" not in d[player][year]:
+        d[player][year].update( {"HOF": 0,} )
+
 def calculate_processed_stats(d):
   for p in d:
     for y in d[p]:
@@ -93,17 +152,11 @@ def plotXY(x, y, title, xlbl, ylbl, x_3decimals, y_3decimals):
   #plt.show()
   plt.close()
 
-if __name__ == "__main__":
-  avg = list()
-  iso = list()
+def get_plot_data_lists(stat_dictionary):
   plot_data = {}
-  stat_dictionary = get_mlb_data_from_csv()
-  calculate_processed_stats(stat_dictionary)
   for player in stat_dictionary:
     for year in stat_dictionary[player]:
       if stat_dictionary[player][year]["PA"] >= 50:
-        avg.append(stat_dictionary[player][year]["AVG"])
-        iso.append(stat_dictionary[player][year]["ISO"])
         for key in stat_dictionary[player][year]:
           try:
             int(stat_dictionary[player][year][key])
@@ -115,11 +168,33 @@ if __name__ == "__main__":
             plot_data[key].append(-1)
           else: 
             plot_data[key].append(stat_dictionary[player][year][key])
-  print "Avg Avg: " + str(calculate_average(stat_dictionary,"AVG"))
-  
-# This takes a long time to run, but produces (>400) 2D plots for correlations between all stats
+  return plot_data
+
+def plot_all_2D_correlations(plot_data):
+  # This takes a long time to run, but produces (>400) 2D plots for correlations between all stats
   for key in plot_data:
     for key2 in plot_data:
       if key != key2:
         plotXY(plot_data[key],plot_data[key2],key2+" vs "+key, key, key2, False, False)
-  
+
+
+if __name__ == "__main__":
+  stat_dictionary = get_mlb_data_from_csv()
+  add_personal_info_to_dictionary(stat_dictionary)
+  add_hall_of_fame_to_dictionary(stat_dictionary)
+  calculate_processed_stats(stat_dictionary)
+  #plot_data = get_plot_data_lists(stat_dictionary)
+  #plot_all_2D_correlations(plot_data)
+  #print "Avg Avg: " + str(calculate_average(stat_dictionary,"AVG"))
+  count_players = []
+  count_HOF = []
+  """for p in stat_dictionary:
+    for y in stat_dictionary[p]:
+      if p not in count_players:
+        count_players.append(p)
+      if p not in count_HOF: 
+        if stat_dictionary[p][y]["HOF"]:
+          count_HOF.append(p)
+  print count_HOF
+  print count_players
+  print "Percentage of Players in HOF: " + str(float(len(count_HOF))/float(len(count_players))*100) +"%"""
