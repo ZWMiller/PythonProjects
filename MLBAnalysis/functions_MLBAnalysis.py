@@ -109,6 +109,46 @@ def add_hall_of_fame_to_dictionary(d):
     if "HOF" not in d[player]:
       d[player].update( {"HOF": 0,} )
 
+def add_false_info_to_blanks(row):
+  line2 = []
+  for i, x in enumerate(row):
+    if len(x.strip())< 1:
+      x = row[i] = '-999'
+    line2.append(str(x))
+  return line2
+
+
+def remove_pitchers_from_dictionary(d):
+  with open('baseballDatabank/Pitching.csv','r') as f:
+    skipFirstLine = True
+    reader = csv.reader(f)
+    alreadyRemoved = []
+    for row in reader:
+      if skipFirstLine:
+        skipFirstLine = False
+        continue
+      try:
+        line2 = add_false_info_to_blanks(row)
+        playerID, yearID, stint, teamID, lgID, W, L, G, GS, CG, SHO, SV, IPouts, H, ER, HR, BB, SO, BAOpp, ERA, IBB, WP, HBP, BK, BFP, GF, R, SH, SF, GIDP = line2
+      except:
+        print "Bad Line, Skipping!\n"
+        print "Unexpected error:", sys.exc_info()[0]
+        continue
+      playerID = playerID.lower()
+      G = int(G)
+      yearID = int(yearID)
+      try:
+        G_BAT = d[playerID][yearID]["G"]
+      except:
+        G_BAT = 0
+      if G >= G_BAT:
+        try: 
+          d.pop(playerID)
+          alreadyRemoved.append(playerID)
+        except:
+          if playerID not in alreadyRemoved:
+            print playerID + " not in Dictionary!"
+
 def calculate_processed_stats(d):
   for p in d:
     for y in d[p]: 

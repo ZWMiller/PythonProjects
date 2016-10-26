@@ -9,6 +9,7 @@ if __name__ == "__main__":
   bb.add_personal_info_to_dictionary(stat_dictionary)
   bb.add_hall_of_fame_to_dictionary(stat_dictionary)
   bb.calculate_processed_stats(stat_dictionary)
+  bb.remove_pitchers_from_dictionary(stat_dictionary)
   #plot_data = bb.get_plot_data_lists(stat_dictionary)
   #bb.plot_all_2D_correlations(plot_data)
   #print "Avg Avg: " + str(bb.calculate_average(stat_dictionary,"AVG"))
