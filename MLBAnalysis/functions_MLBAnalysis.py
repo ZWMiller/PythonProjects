@@ -221,3 +221,33 @@ def plot_all_2D_correlations(plot_data):
       if key != key2:
         plotXY(plot_data[key],plot_data[key2],key2+" vs "+key, key, key2, False, False)
 
+def calculate_career_average(d):
+  count = {}
+  avg = {}
+  career = {}
+  for p in d:
+    if p not in count:
+      count[p] = {}
+      avg[p] = {}
+    for y in d[p]:
+      if not isinstance(y,(int, long)):
+        continue
+      for key in d[p][y]:
+        try:
+          int(d[p][y][key])
+        except:
+          continue
+        if key not in count[p]:
+          count[p].update({ key: 1 })
+          avg[p].update({ key: d[p][y][key] })
+        else:
+          count[p][key] += 1
+          avg[p][key] += d[p][y][key]
+  for p in d:
+    if p not in career:
+      career[p] = {}
+    for key in avg[p]:
+      career[p].update({ key: float(avg[p][key])/float(count[p][key]) })
+    career[p].update({ "seasons": count[p]["G"] })
+  return career
+

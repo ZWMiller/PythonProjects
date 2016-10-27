@@ -13,6 +13,7 @@ if __name__ == "__main__":
   #plot_data = bb.get_plot_data_lists(stat_dictionary)
   #bb.plot_all_2D_correlations(plot_data)
   #print "Avg Avg: " + str(bb.calculate_average(stat_dictionary,"AVG"))
+  career_stats = bb.calculate_career_average(stat_dictionary)
   count_players = []
   count_HOF = []
   for p in stat_dictionary:
@@ -24,3 +25,4 @@ if __name__ == "__main__":
   print "Players in HOF: " + str(len(count_HOF))
   print "Players in MLB: " + str(len(count_players))
   print "Percentage of Players in HOF: " + str(float(len(count_HOF))/float(len(count_players))*100) +"%"
+
