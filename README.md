@@ -42,4 +42,15 @@ left as black and unbolded, so that there is a contrast. All words that are in t
 
 ## MLB Database Analyzer
 
-This code loads in a CSV from http://www.seanlahman.com/baseball-archive/statistics/ that contains stats from all years of the MLB. The code makes nested dictionaries for each player by the year of their stats. So for Jim Bob, there is one dictionary made of sub-dictionaries for each year of stats. So stats['jimbob'][2009] would return a dictionary of Jim Bob's stats from 2009. The code also santizes the inputs, replacing all missing data with -999 so these missing values can be easily checked and removed from future analyses.
+This code loads in a CSV from http://www.seanlahman.com/baseball-archive/statistics/ that contains stats from all years of the MLB. The code makes nested dictionaries for each player by the year of their stats. So for Jim Bob, there is one dictionary made of sub-dictionaries for each year of stats. So stats['jimbob'][2009] would return a dictionary of Jim Bob's stats from 2009. The code also santizes the inputs, replacing all missing data with -999 so these missing values can be easily checked and removed from future analyses. There are functions to draw the correlations between all possible statistical variable combinations, to compute the career average of a players stats, to remove pitchers from the main batting dictionary, to add whether or not a player has been added to the hall of fame, and to add a players personal information (name, date of birth, etc) to the dictionary so that the dictionary can be fully filtered into "only those players who would be inducted into the hall of fame as a position player (not a pitcher)" and then a machine learning algorithm can be applied to predict if a player will be inducted to the hall of fame (and the personal information can be used to associate the players name with the prediction).
+
+## Pygame Test
+
+This is simply an attempt to make a small interactive session with a few
+classes and interaction from the user. There is no "game" really... the user
+can spawn a set of ever changing circular objects that move around within a
+space. There is a counter that computes the score for each object
+(lifetime). This is based on the pygame module that is freely available
+online. No more work is planned for this, it was a simple chance to explore
+the pygame library, work on infinite loops with user input, and to build a few
+classes and class managers.
