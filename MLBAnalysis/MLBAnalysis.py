@@ -3,6 +3,10 @@ import csv
 import matplotlib.pyplot as plt
 import sys
 import functions_MLBAnalysis as bb
+#from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score
+import random
 
 if __name__ == "__main__":
   stat_dictionary = bb.get_mlb_data_from_csv()
@@ -25,4 +29,48 @@ if __name__ == "__main__":
   print "Players in HOF: " + str(len(count_HOF))
   print "Players in MLB: " + str(len(count_players))
   print "Percentage of Players in HOF: " + str(float(len(count_HOF))/float(len(count_players))*100) +"%"
+  
+  X = []
+  Y = []
+  for p in career_stats:
+    X_temp,Y_temp = bb.convert_dictionary_to_learning_data(career_stats[p])
+    X.append(X_temp)
+    Y.append(Y_temp)
+
+  X_test = []
+  X_train = []
+  y_test = []
+  y_train = []
+  inData = zip(X,Y)
+  for tup in inData:
+      t1, t2 = zip(*inData)
+      if t2 == 1:
+        if random.random() < 0.7:
+            X_train.append(t1)
+            y_train.append(t2)
+        else:
+            X_test.append(t1)
+            y_test.append(t2)
+      else:
+        if random.random() < 0.7:
+            X_train.append(t1)
+            y_train.append(t2)
+        else:
+            X_test.append(t1)
+            y_test.append(t2)
+
+
+#  X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.30, random_state=42)
+  clf = LogisticRegression()
+  clf.fit(X_train, y_train)
+
+  y_pred = clf.predict(X_test)
+
+  result = zip(y_pred, y_test)
+
+  print result
+  print f1_score(y_test, y_pred, average='weighted')
+
+
+
 
