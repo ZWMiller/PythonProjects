@@ -32,32 +32,31 @@ if __name__ == "__main__":
   
   X = []
   Y = []
-  for p in career_stats:
-    X_temp,Y_temp = bb.convert_dictionary_to_learning_data(career_stats[p])
-    X.append(X_temp)
-    Y.append(Y_temp)
-
   X_test = []
   X_train = []
   y_test = []
   y_train = []
-  inData = zip(X,Y)
-  for tup in inData:
-      t1, t2 = zip(*inData)
-      if t2 == 1:
+  inData = []
+  for p in career_stats:
+    t1, t2 = bb.convert_dictionary_to_learning_data(career_stats[p])
+    print t1
+    print t2
+    print
+    if t2 == 1:
         if random.random() < 0.7:
             X_train.append(t1)
             y_train.append(t2)
         else:
             X_test.append(t1)
             y_test.append(t2)
-      else:
+    else:
         if random.random() < 0.7:
             X_train.append(t1)
             y_train.append(t2)
         else:
             X_test.append(t1)
             y_test.append(t2)
+
 
 
 #  X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.30, random_state=42)
