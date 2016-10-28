@@ -260,7 +260,8 @@ def calculate_career_average(d):
 def convert_dictionary_to_learning_data(d):
     hof = d["HOF"]
     line = [d["G"], d["AB"], d["R"], d["H"], d["X2B"], d["X3B"], d["HR"], d["RBI"], d["SB"], d["CS"], d["BB"], d["SO"], d["IBB"], d["HBP"], d["SH"], d["SF"], d["GIDP"], d["OBP"], d["AVG"], d["ISO"], d["seasons"]]
-    return line, hof
+    name = d["playerID"]
+    return line, hof, name
 
 def plot_probability_distribution(data):
     dt = sorted(data)

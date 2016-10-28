@@ -39,10 +39,15 @@ if __name__ == "__main__":
   X_train = []
   y_test = []
   y_train = []
-  x_to_predict = []
+  X_to_predict = []
+  name_of_to_predict = []
   for p in career_stats:
-    t1, t2 = bb.convert_dictionary_to_learning_data(career_stats[p])
-   
+    t1, t2, t3 = bb.convert_dictionary_to_learning_data(career_stats[p])
+    
+    if stat_dictionary[p]["lastYear"] >= 2005 and stat_dictionary[p]["seasonsPlayed"] > 2:
+        X_to_predict.append(t1)
+        name_of_to_predict.append(t3)
+
     # Screen ineligible players from training and test data
     if stat_dictionary[p]["seasonsPlayed"] < 10 and stat_dictionary[p]["lastYear"] < 2005:
         continue
@@ -63,29 +68,25 @@ if __name__ == "__main__":
             else:
                 X_test.append(t1)
                 y_test.append(t2)
-    else:
-        x_to_predict.append(t1)
 
-
-
-#  X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.30, random_state=42)
+  # Actually use the scikit learn model
   clf = LogisticRegression()
   clf.fit(X_train, y_train)
 
   y_pred = clf.predict(X_test)
   y_prob = clf.predict_proba(X_test)
 
+  # Plot Probability, sorted to see the discrimination power
   plot_prob = []
   for ele in y_prob:
       plot_prob.append(ele[1])
   bb.plot_probability_distribution(plot_prob)
-
-
+  
   #result = zip(y_pred, y_test)
-
   #for r in result:
   #  print r
   
+  print "---Direct Prediction---"
   print "F1: "
   print f1_score(y_test, y_pred, average='weighted')
   print "Precision: "
@@ -94,7 +95,51 @@ if __name__ == "__main__":
   print recall_score(y_test, y_pred)
   print "Confusion Matrix: "
   print confusion_matrix(y_test, y_pred)
+  print
+  
+  # Try using a threshold with the prediction probability to get better model
+  # Only write out answer with best F1 value
+  bestThresh = 0.6
+  bestF1 = 0
+  for thresh in range(2,13):
+    y_pred2=[]
+    thresh = float(thresh)/20.0
+    for ele in y_prob:
+      if ele[1] > thresh:
+          y_pred2.append(1)
+      else:
+          y_pred2.append(0)
+    f1 = f1_score(y_test, y_pred2, average='weighted')
+    if f1 > bestF1:
+         bestF1 = f1
+         bestThresh = thresh
+    
+  y_pred2=[]
+  for ele in y_prob:
+    if ele[1] > bestThresh:
+        y_pred2.append(1)
+    else:
+        y_pred2.append(0) 
 
+  print "---Probability with Threshold: " + str(bestThresh) + "---"
+  print "F1: "
+  print f1_score(y_test, y_pred2, average='weighted')
+  print "Precision: "
+  print precision_score(y_test, y_pred2)
+  print "Recall: "
+  print recall_score(y_test, y_pred2)
+  print "Confusion Matrix: "
+  print confusion_matrix(y_test, y_pred2)
+  print
 
+  # Now apply to newer players
+  y_new = clf.predict_proba(X_test)
+  prediction = zip(y_new, name_of_to_predict)
 
+  for pre in prediction:
+      pr, nm = pre
+      if pr[1] > bestThresh:
+          print stat_dictionary[nm]["firstName"] + " " + stat_dictionary[nm]["lastName"] + ": 1"
+      else:
+          print stat_dictionary[nm]["firstName"] + " " + stat_dictionary[nm]["lastName"] + ": 0"
 
