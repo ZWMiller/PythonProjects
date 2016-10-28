@@ -6,6 +6,9 @@ import functions_MLBAnalysis as bb
 #from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
 import random
 
 if __name__ == "__main__":
@@ -70,12 +73,27 @@ if __name__ == "__main__":
   clf.fit(X_train, y_train)
 
   y_pred = clf.predict(X_test)
+  y_prob = clf.predict_proba(X_test)
 
-  result = zip(y_pred, y_test)
+  plot_prob = []
+  for ele in y_prob:
+      plot_prob.append(ele[1])
+  bb.plot_probability_distribution(plot_prob)
 
-  for r in result:
-    print r
+
+  #result = zip(y_pred, y_test)
+
+  #for r in result:
+  #  print r
+  
+  print "F1: "
   print f1_score(y_test, y_pred, average='weighted')
+  print "Precision: "
+  print precision_score(y_test, y_pred)
+  print "Recall: "
+  print recall_score(y_test, y_pred)
+  print "Confusion Matrix: "
+  print confusion_matrix(y_test, y_pred)
 
 
 

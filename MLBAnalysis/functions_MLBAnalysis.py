@@ -261,3 +261,14 @@ def convert_dictionary_to_learning_data(d):
     hof = d["HOF"]
     line = [d["G"], d["AB"], d["R"], d["H"], d["X2B"], d["X3B"], d["HR"], d["RBI"], d["SB"], d["CS"], d["BB"], d["SO"], d["IBB"], d["HBP"], d["SH"], d["SF"], d["GIDP"], d["OBP"], d["AVG"], d["ISO"], d["seasons"]]
     return line, hof
+
+def plot_probability_distribution(data):
+    dt = sorted(data)
+    counter = 0.5
+    x = []
+    y = []
+    for d in dt:
+        x.append(counter)
+        y.append(d)
+        counter += 1.
+    plotXY(x,y,"Sorted Probability of HOF", "Number", "Probability", False, False)
