@@ -225,13 +225,18 @@ def calculate_career_average(d):
   count = {}
   avg = {}
   career = {}
+  lastYear = 0
   for p in d:
     if p not in count:
       count[p] = {}
       avg[p] = {}
+      d[p].update({"lastYear": lastYear, "seasonsPlayed": 0})
     for y in d[p]:
       if not isinstance(y,(int, long)):
         continue
+      d[p]["seasonsPlayed"] += 1
+      if y > d[p]["lastYear"]:
+          d[p]["lastYear"] = y
       for key in d[p][y]:
         try:
           int(d[p][y][key])
@@ -248,7 +253,7 @@ def calculate_career_average(d):
       career[p] = {}
     for key in avg[p]:
       career[p].update({ key: float(avg[p][key])/float(count[p][key]) })
-    career[p].update({ "seasons": count[p]["G"], "HOF": d[p]["HOF"], "playerID": p,})
+    career[p].update({ "seasons": count[p]["G"], "HOF": d[p]["HOF"], "playerID": p, })
 
   return career
 

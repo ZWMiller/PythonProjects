@@ -36,26 +36,32 @@ if __name__ == "__main__":
   X_train = []
   y_test = []
   y_train = []
-  inData = []
+  x_to_predict = []
   for p in career_stats:
     t1, t2 = bb.convert_dictionary_to_learning_data(career_stats[p])
-    print t1
-    print t2
-    print
-    if t2 == 1:
-        if random.random() < 0.7:
-            X_train.append(t1)
-            y_train.append(t2)
+   
+    # Screen ineligible players from training and test data
+    if stat_dictionary[p]["seasonsPlayed"] < 10 and stat_dictionary[p]["lastYear"] < 2005:
+        continue
+
+    if stat_dictionary[p]["lastYear"] < 2005: # want to predict for people who are not yet eligible
+                                # So only use eligible in training and test
+        if t2 == 1:
+            if random.random() < 0.7:
+                X_train.append(t1)
+                y_train.append(t2)
+            else:
+                X_test.append(t1)
+                y_test.append(t2)
         else:
-            X_test.append(t1)
-            y_test.append(t2)
+            if random.random() < 0.7:
+                X_train.append(t1)
+                y_train.append(t2)
+            else:
+                X_test.append(t1)
+                y_test.append(t2)
     else:
-        if random.random() < 0.7:
-            X_train.append(t1)
-            y_train.append(t2)
-        else:
-            X_test.append(t1)
-            y_test.append(t2)
+        x_to_predict.append(t1)
 
 
 
@@ -67,7 +73,8 @@ if __name__ == "__main__":
 
   result = zip(y_pred, y_test)
 
-  print result
+  for r in result:
+    print r
   print f1_score(y_test, y_pred, average='weighted')
 
 
