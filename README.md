@@ -38,11 +38,46 @@ left as black and unbolded, so that there is a contrast. All words that are in t
 80% most common words are bolded. This macro also makes a plot of the N most common words 
 (N is set in the plot making function as "limit"). This also makes a plot of the words and their counts and places it in the HTML page. The most common words in the King James Version of the Bible available in project Guttenburg is shown below.
 
-![60 Most Common Words in KJV](wordCounter/img/bibleWordCountPlot.png)
+![60 Most Common Words in KJV](readmeImages/bibleWordCountPlot.png)
+
+![60 Most Common Words @RealDonaldTrum](readmeImages/realDonaldTrump.png)
 
 ## MLB Database Analyzer
 
-This code loads in a CSV from http://www.seanlahman.com/baseball-archive/statistics/ that contains stats from all years of the MLB. The code makes nested dictionaries for each player by the year of their stats. So for Jim Bob, there is one dictionary made of sub-dictionaries for each year of stats. So stats['jimbob'][2009] would return a dictionary of Jim Bob's stats from 2009. The code also santizes the inputs, replacing all missing data with -999 so these missing values can be easily checked and removed from future analyses. There are functions to draw the correlations between all possible statistical variable combinations, to compute the career average of a players stats, to remove pitchers from the main batting dictionary, to add whether or not a player has been added to the hall of fame, and to add a players personal information (name, date of birth, etc) to the dictionary so that the dictionary can be fully filtered into "only those players who would be inducted into the hall of fame as a position player (not a pitcher)" and then a machine learning algorithm can be applied to predict if a player will be inducted to the hall of fame (and the personal information can be used to associate the players name with the prediction).
+This code loads in a CSV from http://www.seanlahman.com/baseball-archive/statistics/ that contains stats from all years of the MLB. The code makes nested dictionaries for each player by the year of their stats. So for Jim Bob, there is one dictionary made of sub-dictionaries for each year of stats. So stats['jimbob'][2009] would return a dictionary of Jim Bob's stats from 2009. The code also santizes the inputs, replacing all missing data with -999 so these missing values can be easily checked and removed from future analyses. There are functions to draw the correlations between all possible statistical variable combinations, to compute the career average of a players stats, to remove pitchers from the main batting dictionary, to add whether or not a player has been added to the hall of fame, and to add a players personal information (name, date of birth, etc) to the dictionary so that the dictionary can be fully filtered into "only those players who would be inducted into the hall of fame as a position player (not a pitcher)" and then a machine learning algorithm can be applied to predict if a player will be inducted to the hall of fame (and the personal information can be used to associate the players name with the prediction). This is all done without PANDAS (python library) so that I can truly learn my way around python data structures. PANDAS will be attempted in another project.
+
+Some example plots 
+
+*1: correlations between OBP and ISO, each dot represents
+one season for one player 
+
+*2: The probability of being inducted into the hall of fame, as calculated by
+a Random Forest Classification Algorithm. This shows the discriminatory power
+of the algorithm. A threshold is computed by optimizing the F1 Score (a
+measure of how accurate the algorithm was) on the test data using the output
+probabilities. 
+
+![Example Correlations between Variables](readmeImages/OBPvsISO.png)
+
+![Example HOF Prediction](readmeImages/ProbabilityvsNumber.png)
+
+In it's first iteration, the algorithm predicts the following for players that
+are still player or have retired after the year 2005 (using a probability
+threshold and then 1/2 the threshold for "maybe"):
+
+Predicted HOF:
+['Todd Helton', 'Barry Bonds', 'Omar Vizquel', 'Johnny Damon', 'Sammy Sosa',
+'David Ortiz', 'Gary Sheffield', 'Adrian Beltre', 'Alex Rodriguez', 'Manny
+Ramirez', 'Ken Griffey', 'Albert Pujols', 'Vladimir Guerrero', 'Bobby Abreu',
+'Jeff Bagwell', 'Craig Biggio', 'Jim Thome', 'Frank Thomas', 'Miguel Cabrera',
+'Bernie Williams', 'Carlos Beltran', 'Rafael Palmeiro', 'Derek Jeter',
+'Chipper Jones', 'Ichiro Suzuki']
+
+Maybe HOF:
+['Carlos Delgado', 'Ivan Rodriguez', 'Moises Alou', 'Julio Franco', 'Larry
+Walker', 'Jason Giambi', 'Paul Konerko', 'Jeff Kent', 'Kenny Lofton', 'Edgar
+Renteria', 'Aramis Ramirez', 'Steve Finley', 'Magglio Ordonez', 'Miguel
+Tejada', 'Torii Hunter', 'Jimmy Rollins', 'Luis Gonzalez']
 
 ## Pygame Test
 

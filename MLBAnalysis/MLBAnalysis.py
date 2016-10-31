@@ -76,8 +76,8 @@ if __name__ == "__main__":
                 y_test.append(t2)
 
   # Actually use the scikit learn model
-  #clf = LogisticRegression()
-  clf = RandomForestClassifier(n_estimators = 100)
+  clf = LogisticRegression()
+  #clf = RandomForestClassifier(n_estimators = 100)
   clf.fit(X_train, y_train)
 
   y_pred = clf.predict(X_test)

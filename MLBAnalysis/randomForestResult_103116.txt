@@ -1,0 +1,13 @@
+Predicted HOF:
+['Todd Helton', 'Barry Bonds', 'Omar Vizquel', 'Johnny Damon', 'Sammy Sosa',
+'David Ortiz', 'Gary Sheffield', 'Adrian Beltre', 'Alex Rodriguez', 'Manny
+Ramirez', 'Ken Griffey', 'Albert Pujols', 'Vladimir Guerrero', 'Bobby Abreu',
+'Jeff Bagwell', 'Craig Biggio', 'Jim Thome', 'Frank Thomas', 'Miguel Cabrera',
+'Bernie Williams', 'Carlos Beltran', 'Rafael Palmeiro', 'Derek Jeter',
+'Chipper Jones', 'Ichiro Suzuki']
+
+Maybe HOF:
+['Carlos Delgado', 'Ivan Rodriguez', 'Moises Alou', 'Julio Franco', 'Larry
+Walker', 'Jason Giambi', 'Paul Konerko', 'Jeff Kent', 'Kenny Lofton', 'Edgar
+Renteria', 'Aramis Ramirez', 'Steve Finley', 'Magglio Ordonez', 'Miguel
+Tejada', 'Torii Hunter', 'Jimmy Rollins', 'Luis Gonzalez']
