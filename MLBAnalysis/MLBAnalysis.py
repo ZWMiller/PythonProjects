@@ -50,15 +50,15 @@ if __name__ == "__main__":
 
     t1, t2, t3 = bb.convert_dictionary_to_learning_data(career_stats[p])
     
-    if stat_dictionary[p]["lastYear"] >= 2005 and stat_dictionary[p]["seasonsPlayed"] > 2:
+    if stat_dictionary[p]["lastYear"] >= 2011 and stat_dictionary[p]["seasonsPlayed"] > 2:
         X_to_predict.append(t1)
         name_of_to_predict.append(t3)
 
     # Screen ineligible players from training and test data
-    if stat_dictionary[p]["seasonsPlayed"] < 10 and stat_dictionary[p]["lastYear"] < 2005:
+    if stat_dictionary[p]["seasonsPlayed"] < 10 and stat_dictionary[p]["lastYear"] < 2011:
         continue
 
-    if stat_dictionary[p]["lastYear"] < 2005: # want to predict for people who are not yet eligible
+    if stat_dictionary[p]["lastYear"] < 2011: # want to predict for people who are not yet eligible
                                 # So only use eligible in training and test
         if t2 == 1:
             if random.random() < 0.7:
