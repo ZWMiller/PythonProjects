@@ -221,7 +221,7 @@ def plot_all_2D_correlations(plot_data):
       if key != key2:
         plotXY(plot_data[key],plot_data[key2],key2+" vs "+key, key, key2, False, False)
 
-def calculate_career_average(d):
+def calculate_career_stats(d):
   count = {}
   avg = {}
   career = {}
@@ -252,7 +252,10 @@ def calculate_career_average(d):
     if p not in career:
       career[p] = {}
     for key in avg[p]:
-      career[p].update({ key: float(avg[p][key])/float(count[p][key]) })
+        if key == "AVG" or key == "OBP" or key == "ISO":
+            career[p].update({ key: float(avg[p][key])/float(count[p][key]) })
+        else:
+            career[p].update({ key: float(avg[p][key]) })
     career[p].update({ "seasons": count[p]["G"], "HOF": d[p]["HOF"], "playerID": p, })
 
   return career

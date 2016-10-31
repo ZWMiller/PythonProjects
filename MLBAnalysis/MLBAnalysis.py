@@ -5,6 +5,7 @@ import sys
 import functions_MLBAnalysis as bb
 #from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score
@@ -20,7 +21,7 @@ if __name__ == "__main__":
   #plot_data = bb.get_plot_data_lists(stat_dictionary)
   #bb.plot_all_2D_correlations(plot_data)
   #print "Avg Avg: " + str(bb.calculate_average(stat_dictionary,"AVG"))
-  career_stats = bb.calculate_career_average(stat_dictionary)
+  career_stats = bb.calculate_career_stats(stat_dictionary)
   count_players = []
   count_HOF = []
   for p in stat_dictionary:
@@ -42,6 +43,11 @@ if __name__ == "__main__":
   X_to_predict = []
   name_of_to_predict = []
   for p in career_stats:
+    print p
+    print career_stats[p]
+    print stat_dictionary[p]
+    print 
+
     t1, t2, t3 = bb.convert_dictionary_to_learning_data(career_stats[p])
     
     if stat_dictionary[p]["lastYear"] >= 2005 and stat_dictionary[p]["seasonsPlayed"] > 2:
@@ -70,7 +76,8 @@ if __name__ == "__main__":
                 y_test.append(t2)
 
   # Actually use the scikit learn model
-  clf = LogisticRegression()
+  #clf = LogisticRegression()
+  clf = RandomForestClassifier(n_estimators = 100)
   clf.fit(X_train, y_train)
 
   y_pred = clf.predict(X_test)
@@ -133,13 +140,21 @@ if __name__ == "__main__":
   print
 
   # Now apply to newer players
-  y_new = clf.predict_proba(X_test)
+  y_new = clf.predict_proba(X_to_predict)
   prediction = zip(y_new, name_of_to_predict)
 
+  predictedHOF = []
+  predictedMaybe = []
   for pre in prediction:
       pr, nm = pre
+      playername = stat_dictionary[nm]["firstName"] + " " + stat_dictionary[nm]["lastName"]
       if pr[1] > bestThresh:
-          print stat_dictionary[nm]["firstName"] + " " + stat_dictionary[nm]["lastName"] + ": 1"
-      else:
-          print stat_dictionary[nm]["firstName"] + " " + stat_dictionary[nm]["lastName"] + ": 0"
+          predictedHOF.append(playername)
+      elif pr[1] > bestThresh/2.0:
+          predictedMaybe.append(playername)
 
+  print "Predicted HOF: "
+  print predictedHOF
+  print
+  print "Maybe HOF: "
+  print predictedMaybe
