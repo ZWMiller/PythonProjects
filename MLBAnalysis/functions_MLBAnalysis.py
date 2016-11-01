@@ -255,7 +255,8 @@ def calculate_career_stats(d):
         if key == "AVG" or key == "OBP" or key == "ISO":
             career[p].update({ key: float(avg[p][key])/float(count[p][key]) })
         else:
-            career[p].update({ key: float(avg[p][key]) })
+            #career[p].update({ key: float(avg[p][key]) }) # If you want counting stats (if he never played again, would he HOF?)
+            career[p].update({ key: float(avg[p][key])/float(count[p][key]) }) # if you want average stats (is he on pace to HOF?)
     career[p].update({ "seasons": count[p]["G"], "HOF": d[p]["HOF"], "playerID": p, })
 
   return career
