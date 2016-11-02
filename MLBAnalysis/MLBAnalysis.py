@@ -38,7 +38,8 @@ if __name__ == "__main__":
   print "Percentage of Training Players in HOF: " + str(float(len(count_HOF))/float(len(count_players))*100) +"%"
  
   HOF = {}
-  for _ in range(1,100):
+  number_of_loops = 1000
+  for _ in range(1,number_of_loops+1):
       X = []
       Y = []
       X_test = []
@@ -112,7 +113,7 @@ if __name__ == "__main__":
       if DEBUG:
           print "---Direct Prediction---"
           print "F1: "
-          print f1_score(y_test, y_pred, average='weighted')
+          print f1_score(y_test, y_pred, average='binary')
           print "Precision: "
           print precision_score(y_test, y_pred)
           print "Recall: "
@@ -133,7 +134,7 @@ if __name__ == "__main__":
               y_pred2.append(1)
           else:
               y_pred2.append(0)
-        f1 = f1_score(y_test, y_pred2, average='weighted')
+        f1 = f1_score(y_test, y_pred2, average='binary')
         if f1 > bestF1:
              bestF1 = f1
              bestThresh = thresh
@@ -147,7 +148,7 @@ if __name__ == "__main__":
       if DEBUG:
           print "---Probability with Threshold: " + str(bestThresh) + "---"
           print "F1: "
-          print f1_score(y_test, y_pred2, average='weighted')
+          print f1_score(y_test, y_pred2, average='binary')
           print "Precision: "
           print precision_score(y_test, y_pred2)
           print "Recall: "
@@ -188,6 +189,6 @@ if __name__ == "__main__":
           else:
               HOF[play]+=1
 
-  print "Appearances in List: "
+  print "HOF Percentage from Bootstrap: "
   for player in HOF:
-        print player + " " + str(HOF[player])
+        print player + " " + str(float(HOF[player])/float(number_of_loops))

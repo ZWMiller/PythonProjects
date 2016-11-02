@@ -36,11 +36,13 @@ red. If it's in the 10-20% most common words, it will be orange. And so on,
 until we get to the words that appear with very little frequency, which are
 left as black and unbolded, so that there is a contrast. All words that are in the top 
 80% most common words are bolded. This macro also makes a plot of the N most common words 
-(N is set in the plot making function as "limit"). This also makes a plot of the words and their counts and places it in the HTML page. The most common words in the King James Version of the Bible available in project Guttenburg is shown below.
+(N is set in the plot making function as "limit"). This also makes a plot of the words and their counts and places it in the HTML page. The most common words in the King James Version of the Bible available in project Guttenburg are shown below. Following that is an example image counting the most common words in a random sample of 200 tweets from Donald Trump's Twitter account, which reused much of the TwitterCounter API access to allow access to the tweet-stream. Also shown is a sample of the generated HTML page is shown below that in image form, with the common words highlighted in their color.
 
 ![60 Most Common Words in KJV](readmeImages/bibleWordCountPlot.png)
 
 ![60 Most Common Words @RealDonaldTrum](readmeImages/realDonaldTrump.png)
+
+![Sample HTML Highlighting Common Words](readmeImages/wordCountHTML.png)
 
 ## MLB Database Analyzer
 
@@ -48,10 +50,10 @@ This code loads in a CSV from http://www.seanlahman.com/baseball-archive/statist
 
 Some example plots 
 
-*1: correlations between OBP and ISO, each dot represents
+* 1: correlations between OBP and ISO, each dot represents
 one season for one player 
 
-*2: The probability of being inducted into the hall of fame, as calculated by
+* 2: The probability of being inducted into the hall of fame, as calculated by
 a Random Forest Classification Algorithm. This shows the discriminatory power
 of the algorithm. A threshold is computed by optimizing the F1 Score (a
 measure of how accurate the algorithm was) on the test data using the output
@@ -63,7 +65,9 @@ probabilities.
 
 In it's first iteration, the algorithm predicts the following for players that
 are still player or have retired after the year 2005 (using a probability
-threshold and then 1/2 the threshold for "maybe"):
+threshold and then 1/2 the threshold for "maybe"), assuming that they never
+play another inning (there is no averaging of stats to account for "rate of
+accrual"):
 
 Predicted HOF:
 ['Todd Helton', 'Barry Bonds', 'Omar Vizquel', 'Johnny Damon', 'Sammy Sosa',
