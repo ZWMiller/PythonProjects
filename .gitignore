@@ -6,3 +6,4 @@ toaesWebscrape/*.html
 toaesWebscrape/*.pyc
 MLBAnalysis/baseballDatabank/*
 MLBAnalysis/img/*
+otherPeoplesExamples/*

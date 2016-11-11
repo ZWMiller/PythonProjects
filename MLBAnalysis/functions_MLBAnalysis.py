@@ -255,15 +255,15 @@ def calculate_career_stats(d):
         if key == "AVG" or key == "OBP" or key == "ISO":
             career[p].update({ key: float(avg[p][key])/float(count[p][key]) })
         else:
-            #career[p].update({ key: float(avg[p][key]) }) # If you want counting stats (if he never played again, would he HOF?)
-            career[p].update({ key: float(avg[p][key])/float(count[p][key]) }) # if you want average stats (is he on pace to HOF?)
+            career[p].update({ key: float(avg[p][key]) }) # If you want counting stats (if he never played again, would he HOF?)
+            #career[p].update({ key: float(avg[p][key])/float(count[p][key]) }) # if you want average stats (is he on pace to HOF?)
     career[p].update({ "seasons": count[p]["G"], "HOF": d[p]["HOF"], "playerID": p, })
 
   return career
 
 def convert_dictionary_to_learning_data(d):
     hof = d["HOF"]
-    line = [d["G"], d["AB"], d["R"], d["H"], d["X2B"], d["X3B"], d["HR"], d["RBI"], d["SB"], d["CS"], d["BB"], d["SO"], d["IBB"], d["HBP"], d["SH"], d["SF"], d["GIDP"], d["OBP"], d["AVG"], d["ISO"], d["seasons"]]
+    line = [d["G"], d["AB"], d["R"], d["H"], d["X2B"], d["X3B"], d["HR"], d["RBI"], d["SB"], d["CS"], d["BB"], d["SO"], d["IBB"], d["HBP"], d["SH"], d["SF"], d["GIDP"], d["OBP"], d["AVG"], d["ISO"]]#, d["seasons"]]
     name = d["playerID"]
     return line, hof, name
 
