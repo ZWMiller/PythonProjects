@@ -93,3 +93,13 @@ space. There is a counter that computes the score for each object
 online. No more work is planned for this, it was a simple chance to explore
 the pygame library, work on infinite loops with user input, and to build a few
 classes and class managers.
+
+## Animation Test
+
+This was a test of using MatPlotLib's built in animation functionality. I
+found many online examples of how to draw a Sine wave or similar, but I wanted
+to be able to draw a scatter plot that updates each time a new point is
+generated. I plan to extend this into making points appear on a map in my next
+example. Sample output below, plotting a 2D normal distribution sampling:
+
+![Example of Matplotlib Animation](readmeImages/myanimation.gif)
