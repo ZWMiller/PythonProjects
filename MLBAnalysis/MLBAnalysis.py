@@ -12,6 +12,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 import random
+from operator import itemgetter
 
 DEBUG = False
 
@@ -188,7 +189,12 @@ if __name__ == "__main__":
               HOF.update({ play: 1})
           else:
               HOF[play]+=1
+  HOFlist = []
+  for play in HOF:
+      HOFlist.append([play, float(HOF[play])/float(number_of_loops)])
 
   print "HOF Percentage from Bootstrap: "
-  for player in HOF:
-        print player + " " + str(float(HOF[player])/float(number_of_loops))
+  sortHOF = sorted(HOFlist, reverse=True, key=itemgetter(1))
+  for player in sortHOF:
+        print str(player[0]) + " " + str(player[1])
+    
