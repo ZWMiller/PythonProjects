@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import neighborhoodize
+# Neighborhoodize from here: https://github.com/bjlange/neighborhoodize
 
 """ Define Class Here """
 class crimes(object):
