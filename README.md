@@ -103,3 +103,17 @@ generated. I plan to extend this into making points appear on a map in my next
 example. Sample output below, plotting a 2D normal distribution sampling:
 
 ![Example of Matplotlib Animation](readmeImages/myanimation.gif)
+
+## Chicago Crimes
+
+This is being used for two reasons: 1) to learn Pandas in detail, 2) To see if
+I can make predictions on where crimes will be. The first step is to read in
+all crime data from 2016, then organize it by neighborhood and then split out
+the dataframes into individual neighborhood dataframes for small scale
+analysis. After that, I will work on manipulating the full data set.
+
+## Facial Recognition & Handwriting Recognition
+
+Both of these are codes found on the internet to familiarize myself with image
+reconignition. My goal is to start with these as examples and extend to more
+complex, self-written image recognition software.

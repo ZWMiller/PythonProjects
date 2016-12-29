@@ -3,11 +3,10 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import random
 
-plt.ion()
 fig, ax = plt.subplots()
 scat = ax.scatter([],[])
 scat.axes.axis([-5, 5, -5, 5])
-num_frames = 1000
+num_frames = 100
 
 def update(point):
     array = scat.get_offsets()
