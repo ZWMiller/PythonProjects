@@ -11,6 +11,7 @@ from keras.utils import np_utils
 class midiFile(object):
     def __init__(self,fname):
         self.fname = fname
+        self.oname = os.path.splitext(self.fname)[0] + "_NNCompose.mid"
         self.convertMidToCsv()
         self.df = self.convertCsvToDataframe()
         self.tempo = int(self.df[self.df['cmd'].str.contains("Tempo")].iloc[0]['pitchshift'])
@@ -38,6 +39,13 @@ class midiFile(object):
         notename = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
         self.df['noteName'] = self.df['note'].apply(lambda x: int(x % 12))
 
+    def convertMidiToMp3(self):
+        basename = os.path.splitext(self.oname)
+        inname = "midiOut/" + str(basename[0]) + ".mid"
+        outname = "mp3Out/" + str(basename[0]) + ".mp3"
+        cmd = "timidity -Ow -o - " + inname + "| lame - " + outname
+        mp3Created = subprocess.Popen(cmd, shell=True)
+
 class network(object):
     def __init__(self):
         self.model = self.getModel()
@@ -56,6 +64,7 @@ if __name__ == "__main__":
     mf = midiFile("ForestMaze.mid")
     mf.convertNotesToName()
     notes = mf.df['noteName'].values
+    mf.convertMidiToMp3()
     #print notes
     #print mf.startTrack
     #print mf.endTrack
