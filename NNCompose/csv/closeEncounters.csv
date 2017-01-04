@@ -1,0 +1,23 @@
+0, 0, Header, 1, 2, 480
+1, 0, Start_track
+1, 0, Title_t, "Close Encounters"
+1, 0, Text_t, "Sample for MIDIcsv Distribution"
+1, 0, Copyright_t, "This file is in the public domain"
+1, 0, Time_signature, 4, 2, 24, 8
+1, 0, Tempo, 500000
+1, 0, End_track
+2, 0, Start_track
+2, 0, Instrument_name_t, "Church Organ"
+2, 0, Program_c, 1, 19
+2, 0, Note_on_c, 1, 79, 81
+2, 960, Note_off_c, 1, 79, 0
+2, 960, Note_on_c, 1, 81, 81
+2, 1920, Note_off_c, 1, 81, 0
+2, 1920, Note_on_c, 1, 77, 81
+2, 2880, Note_off_c, 1, 77, 0
+2, 2880, Note_on_c, 1, 65, 81
+2, 3840, Note_off_c, 1, 65, 0
+2, 3840, Note_on_c, 1, 72, 81
+2, 4800, Note_off_c, 1, 72, 0
+2, 4800, End_track
+0, 0, End_of_file
