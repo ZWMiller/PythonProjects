@@ -103,8 +103,12 @@ class network(object):
         model.add(Dense(12, init='uniform', activation='softmax'))
         return model
 
+    def compile(self):
+        self.model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
 if __name__ == "__main__":
-    mf = midiFile("ForestMaze.mid")
+    #mf = midiFile("ForestMaze.mid")
+    mf = midiFile("Picturesv2.mid")
     mf.convertNotesToName()
     notes = mf.df['noteName'].values
     
@@ -119,39 +123,47 @@ if __name__ == "__main__":
         i+=1
 
     # one-hot encode output to vector or booleans
-    #Y = np_utils.to_categorical(Yx,nb_classes=12)
+    Y = np_utils.to_categorical(Yx,nb_classes=12)
     
     # fix random seed for reproducibility
     seed = 7
     np.random.seed(seed)
     # Get and Compile model
     NN = network()
-    #NN.model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+    NN.compile()
     # Fit the model
-    #NN.model.fit(X, Y, nb_epoch=1, batch_size=20,  verbose=2)
+    NN.model.fit(X, Y, nb_epoch=160, batch_size=30,  verbose=2)
     # calculate predictions
-    #predictions = NN.model.predict(X)
-    #compare = zip(Y,predictions)
-    #for x,y in compare:
+    predictions = NN.model.predict(X)
+    compare = zip(Y,predictions)
+    #for x,y in compare[0:10]:
     #    print x
     #    print y
 
     # Generate Notes
-    notesToGen = 100
+    notesToGen = 300
     currentTime = 0
     quarterNote = mf.qn
     notes = []
     for j in range(0,notesToGen):
-        #newNote = NN.model.predict(X[0])
+        ind = 0
+        val = 0
+        newNote = NN.model.predict(X[j:j+1]).tolist()
+        for i,j in enumerate(newNote[0]):
+            if j>val:
+                ind = i
+                val = j
+        #print ind, newNote[0][ind]
         newNote = random.randint(0,11)
-        #notes.append([2,currentTime, "Note_on_c", 2, 60+int(newNote.index(max(newNote))), 95])
-        notes.append([2,currentTime, "Note_on_c", 2, 60+int(newNote), 95, False])
+        notes.append([2,currentTime, "Note_on_c", 2, 60+int(ind), 95,False])
+        #notes.append([2,currentTime, "Note_on_c", 2, 60+int(newNote), 95, False])
         beatLength = 3
         while beatLength == 3:
             beatLength = random.randint(1,4)
         dt = int(quarterNote/beatLength)
         currentTime = currentTime+dt
-        notes.append([2,currentTime, "Note_off_c", 2, 60+int(newNote), 95, False])
+        notes.append([2,currentTime, "Note_off_c", 2, 60+int(ind), 95, False])
+        #notes.append([2,currentTime, "Note_off_c", 2, 60+int(newNote), 95, False])
     notes.append([2, currentTime, "End_track"])
     mf.makeMidiOut(pd.DataFrame(notes))
     mf.convertMidiToMp3()
