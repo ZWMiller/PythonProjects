@@ -21,7 +21,7 @@ ax[0].set_ylim(-2,2)
 ax[0].set_title("Raw Audio Signal")
 # Plot 1 is for the FFT of the audio
 li2, = ax[1].plot(x, y)
-ax[1].set_xlim(0,600)
+ax[1].set_xlim(0,5000)
 ax[1].set_ylim(-100,100)
 ax[1].set_title("Fast Fourier Transform")
 # Show the plot, but without blocking updates
@@ -30,7 +30,8 @@ plt.pause(0.01)
 def callback(in_data, frame_count, time_info, flag):
     # get and convert the data to float
     audio_data = np.fromstring(in_data, dtype=np.float32)
-    # Fast Fourier Transform, 10*log10(abs) is to scale it
+    
+    # Fast Fourier Transform, 10*log10(abs) is to scale it to dB
     # and make sure it's not imaginary
     dfft = 10*np.log10(abs(np.fft.rfft(audio_data)))
     
@@ -38,7 +39,7 @@ def callback(in_data, frame_count, time_info, flag):
     # If uses plt.draw(), axes are re-drawn every time
     li.set_xdata(np.arange(len(audio_data)))
     li.set_ydata(audio_data)
-    li2.set_xdata(np.arange(len(dfft)))
+    li2.set_xdata(np.arange(len(dfft))*10)
     li2.set_ydata(dfft)
     
     # Show the updated plot, but without blocking
