@@ -129,3 +129,13 @@ kink can be used to determine the optimal number of clusters.
 
 ![k-means steps to find clusters](readmeImages/kmeans_example.gif)
 ![k-means steps to find k](readmeImages/kmeans_FindK.gif)
+
+## Image Flattener
+
+This builds on the K-Means example above, by breaking an image into it's color
+components and projection all points into a 3D Red, Green, Blue space. A
+K-Means clustering is applied and all members of the cluster are forced to be
+the mean value of the cluster. Then the image is reproduced with the new color
+scheme. The image manipulation is built on Python's PILLOW library.
+
+![example of different color clusterings](readmeImages/juliehatclusters.gif)
