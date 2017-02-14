@@ -58,14 +58,16 @@ dataTuple,mode,size = get_image(filename)
 data = map(list,dataTuple)
 numpx = len(data)
 print "Checking for sanity..."
-if k > len([list(x) for x in set(tuple(x) for x in data)]):
-    print "Fewer colors than clusters"
+unique_colors = len([list(x) for x in set(tuple(x) for x in data)])
+if k > unique_colors:
+    print "Fewer colors than requested clusters"
     sys.exit(1)
 
 print "Finding " + str(k) + " color clusters and appropriate replacement colors..."
-print "(This can take a while. Your image has " + str(numpx) + " pixels to analyze."
-print "The length of time depends on number of pixels, number of colors in"
-print "image and the number of requested output colors. Please be patient.)"
+print "(This can take a while. Your image has " + str(numpx) + " pixels to analyze"
+print "and " + str(unique_colors) + " unique colors. The length of time depends on number of pixels,"
+print "number of colors in image and the number of requested output colors.)" 
+print "... Please be patient ..."
 estimator = KMeans(n_clusters=k, n_init=10, init='k-means++')
 clusters = estimator.fit_predict(data)
 means = estimator.cluster_centers_
