@@ -46,6 +46,9 @@ left as black and unbolded, so that there is a contrast. All words that are in t
 
 ## MLB Database Analyzer
 
+Full writeup here:
+https://redlegnation.com/2017/01/17/will-joey-votto-make-the-hall-of-fame-2/
+
 This code loads in a CSV from http://www.seanlahman.com/baseball-archive/statistics/ that contains stats from all years of the MLB. The code makes nested dictionaries for each player by the year of their stats. So for Jim Bob, there is one dictionary made of sub-dictionaries for each year of stats. So stats['jimbob'][2009] would return a dictionary of Jim Bob's stats from 2009. The code also santizes the inputs, replacing all missing data with -999 so these missing values can be easily checked and removed from future analyses. There are functions to draw the correlations between all possible statistical variable combinations, to compute the career average of a players stats, to remove pitchers from the main batting dictionary, to add whether or not a player has been added to the hall of fame, and to add a players personal information (name, date of birth, etc) to the dictionary so that the dictionary can be fully filtered into "only those players who would be inducted into the hall of fame as a position player (not a pitcher)" and then a machine learning algorithm can be applied to predict if a player will be inducted to the hall of fame (and the personal information can be used to associate the players name with the prediction). This is all done without PANDAS (python library) so that I can truly learn my way around python data structures. PANDAS will be attempted in another project.
 
 Some example plots 
