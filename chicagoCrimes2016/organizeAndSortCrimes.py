@@ -2,8 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import matplotlib.pyplot as plt
-import matplotlib.cm
+import matplotlib.cm as cm
 from mpl_toolkits.basemap import Basemap
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
@@ -60,36 +59,71 @@ def update(pt):
 """ Main """
 if __name__ == "__main__":
     hood_map = neighborhoodize.NeighborhoodMap(neighborhoodize.zillow.ILLINOIS)
-    chicagoarea = crimes('ChicagoCrimes2016_Map_test.csv',hood_map)
+    #chicagoarea = crimes('ChicagoCrimes2016_Map_test.csv',hood_map)
+    chicagoarea = crimes('ChicagoCrimes2016_Map.csv',hood_map)
 
-    # To make an animation of all read in crimes
+    # Make a map
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    mymap = Basemap(llcrnrlon=chicagoarea.crimes['Longitude'].min(),
+    mymap = Basemap(llcrnrlon=chicagoarea.crimes['Longitude'].min()-0.4,
                 llcrnrlat=chicagoarea.crimes['Latitude'].min(),
-                urcrnrlon=chicagoarea.crimes['Longitude'].max(),
-                urcrnrlat=chicagoarea.crimes['Latitude'].max(),
+                urcrnrlon=chicagoarea.crimes['Longitude'].max()+0.2,
+                urcrnrlat=chicagoarea.crimes['Latitude'].max()+0.2,
                 projection='lcc',lat_1=32,lat_2=45,lon_0=-95,
                 resolution = 'h')
-
-    #print chicagoarea.crimes['Longitude'].min()-1.
-    #print chicagoarea.crimes['Latitude'].min()-1.
-    #print chicagoarea.crimes['Longitude'].min()+1.
-    #print chicagoarea.crimes['Latitude'].min()+1.
     mymap.drawmapboundary(fill_color='#46bcec')
     mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
     mymap.drawcoastlines()
-    
-    x,y = mymap(0, 0)
-    lon = chicagoarea.crimes['Longitude'].values
-    lat = chicagoarea.crimes['Latitude'].values
-    x,y = mymap(lon,lat)
-    point = mymap.plot(x, y, 'ro', markersize=5)[0]
+
+    # Draw neighborhood bounds
+    for hood in hood_map.neighborhoods:
+        lon,lat = hood.polygon.exterior.coords.xy
+        x,y = mymap(lon,lat)
+        mymap.plot(x,y,'-k',alpha=0.5)
+
+    # Seperate dataframe into list of crime types
+    crimeTypes = chicagoarea.crimes['Primary Type'].unique()
+    colors = iter(cm.rainbow(np.linspace(0, 1, len(crimeTypes))))
+    for crime in crimeTypes:
+        data = chicagoarea.crimes[:][chicagoarea.crimes['Primary Type'] == crime]
+        #x,y = mymap(0, 0)
+        lon = data['Longitude'].values
+        lat = data['Latitude'].values
+        x,y = mymap(lon,lat)
+        mymap.plot(x, y, color=next(colors), linestyle='None', markersize=5, marker='o', alpha=0.7, label=data['Primary Type'].unique()[0])
     
     # To animate it
     #ani = animation.FuncAnimation(plt.gcf(), update, data_gen(chicagoarea.crimes), init_func=init, interval=50, blit=False, save_count=1000)
     #ani.save('myanimation.gif',writer='imagemagick',fps=30)
-    plt.show()
+    plt.legend(loc='upper left',prop={'size':6}, numpoints=1)
+    plt.savefig("chicagoCrimeMap_2016.png")
+    #plt.show()
+
+    plt.clf()
+    mymap = Basemap(llcrnrlon=chicagoarea.crimes['Longitude'].min()-0.4,
+                llcrnrlat=chicagoarea.crimes['Latitude'].min(),
+                urcrnrlon=chicagoarea.crimes['Longitude'].max()+0.2,
+                urcrnrlat=chicagoarea.crimes['Latitude'].max()+0.2,
+                projection='lcc',lat_1=32,lat_2=45,lon_0=-95,
+                resolution = 'h')
+    mymap.drawmapboundary(fill_color='#46bcec')
+    mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
+    mymap.drawcoastlines()
+    
+    # Draw neighborhood bounds
+    for hood in hood_map.neighborhoods:
+        lon,lat = hood.polygon.exterior.coords.xy
+        x,y = mymap(lon,lat)
+        mymap.plot(x,y,'-k',alpha=0.5)
+
+    data = chicagoarea.crimes[:][chicagoarea.crimes['Primary Type'] == 'HOMICIDE']
+    #x,y = mymap(0, 0)
+    lon = data['Longitude'].values
+    lat = data['Latitude'].values
+    x,y = mymap(lon,lat)
+    mymap.plot(x, y, color='r', linestyle='None', markersize=5, marker='o', alpha=1., label=data['Primary Type'].unique()[0])
+    plt.legend(loc='upper left',prop={'size':6}, numpoints=1)
+    plt.savefig("chicagoHomicideMap_2016.png")
 
     # For making neighborhood specific csv
     """
