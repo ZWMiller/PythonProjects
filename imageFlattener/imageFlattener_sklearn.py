@@ -2,7 +2,7 @@ from PIL import Image
 import sys
 import numpy as np
 import random
-import os 
+import os
 from sklearn.cluster import KMeans
 
 def get_image(image_path):
@@ -22,7 +22,7 @@ def get_image(image_path):
         channels = 3
         for px in pixel_values:
             px = list(px)
-            R,G,B,A = px 
+            R,G,B,A = px
             px[0] = ((1-A)*R) + A*R
             px[1] = ((1-A)*G) + A*G
             px[2] = ((1-A)*B) + A*B
@@ -66,7 +66,7 @@ if k > unique_colors:
 print "Finding " + str(k) + " color clusters and appropriate replacement colors..."
 print "(This can take a while. Your image has " + str(numpx) + " pixels to analyze"
 print "and " + str(unique_colors) + " unique colors. The length of time depends on number of pixels,"
-print "number of colors in image and the number of requested output colors.)" 
+print "number of colors in image and the number of requested output colors.)"
 print "... Please be patient ..."
 estimator = KMeans(n_clusters=k, n_init=10, init='k-means++')
 clusters = estimator.fit_predict(data)
@@ -75,7 +75,7 @@ means = estimator.cluster_centers_
 print "Preparing image for output..."
 for i, clst in enumerate(clusters):
     if not i%100000 and numpx > 100000:
-        print "Processing pixel " + str(i) + " / " + str(numpx) + "..."  
+        print "Processing pixel " + str(i) + " / " + str(numpx) + "..."
     elif not i%100000:
         print "Processing pixels."
     data[i] = map(int, means[clst])

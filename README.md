@@ -138,4 +138,4 @@ K-Means clustering is applied and all members of the cluster are forced to be
 the mean value of the cluster. Then the image is reproduced with the new color
 scheme. The image manipulation is built on Python's PILLOW library.
 
-![example of different color clusterings](readmeImages/juliehatclusters.gif)
+![example of different color clusterings](readmeImages/sunsetclusters.gif)
