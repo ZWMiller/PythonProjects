@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 import matplotlib.cm as cm
 from mpl_toolkits.basemap import Basemap
 from matplotlib.patches import Polygon
@@ -34,52 +33,46 @@ class crimes(object):
     def _save_dataframe_to_file(self, fname):
         self.crimes.to_csv(fname)
 
-def init():
-    point.set_data([], [])
-    return point,
+def getMap(df):
+    return Basemap(llcrnrlon=df['Longitude'].min()-0.4,
+                llcrnrlat=df['Latitude'].min(),
+                urcrnrlon=df['Longitude'].max()+0.2,
+                urcrnrlat=df['Latitude'].max()+0.2,
+                projection='lcc',lat_1=32,lat_2=45,lon_0=-95,
+                resolution = 'h')
+def drawNeighborhoods(mymap,hood_map):
+    for hood in hood_map.neighborhoods:
+        lon,lat = hood.polygon.exterior.coords.xy
+        x,y = mymap(lon,lat)
+        mymap.plot(x,y,'-k',color='lightgrey')
 
-def data_gen(df):
-    for index, row in df.iterrows():
-        yield [row['Latitude'],row['Longitude']]
+def drawRefPoints(mymap,refpoints):
+    for town in refpoints:
+        name,lat,lon, offx, offy = town
+        x,y = mymap(lon,lat)
+        mymap.plot(x, y, 'ok')
+        plt.annotate(name, xy=(x,y), xytext=(offx,offy),textcoords='offset points')
 
-def update(pt):
-    #array = scat.get_offsets()
-    #x,y = m(point[0],point[1])
-    #array = np.append(array, [x,y])
-    #scat.set_offsets(array)
-    #return scat
-    x, y = mymap(pt[1], pt[0])
-    point.set_data(x, y)
-    #array = point.get_offsets()
-    #array = np.append(array, [x,y])
-    #point.set_offsets(array)
-    return point,
     
 
 """ Main """
 if __name__ == "__main__":
+    refpoints = [['Loop',41.883333, -87.633333,15,-3],['Wrigley Field',41.948, -87.656,15,-3],['O\'Hare',42, -87.92,-10,10],['Irving Park',41.95, -87.73,-20,10],
+                 ['Oakland',41.82, -87.6,15,-3],['Hyde Park',41.8, -87.59,15,-7],['West Lawn',41.77, -87.72,-5,5],['Calumet Heights',41.728333, -87.579722,15,-5],
+                 ['Washington Heights',41.72, -87.65,-15,-15],['Clearing',41.78, -87.76,-60,-5],['Austin',41.9, -87.76,-50,-5],['Pilsen',41.85, -87.66,-20,-13],
+                 ['New City',41.81, -87.66,-60,-3]]
     hood_map = neighborhoodize.NeighborhoodMap(neighborhoodize.zillow.ILLINOIS)
-    #chicagoarea = crimes('ChicagoCrimes2016_Map_test.csv',hood_map)
-    chicagoarea = crimes('ChicagoCrimes2016_Map.csv',hood_map)
+    chicagoarea = crimes('ChicagoCrimes2016_Map_test.csv',hood_map)
+    #chicagoarea = crimes('ChicagoCrimes2016_Map.csv',hood_map)
 
     # Make a map
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
-    mymap = Basemap(llcrnrlon=chicagoarea.crimes['Longitude'].min()-0.4,
-                llcrnrlat=chicagoarea.crimes['Latitude'].min(),
-                urcrnrlon=chicagoarea.crimes['Longitude'].max()+0.2,
-                urcrnrlat=chicagoarea.crimes['Latitude'].max()+0.2,
-                projection='lcc',lat_1=32,lat_2=45,lon_0=-95,
-                resolution = 'h')
+    mymap = getMap(chicagoarea.crimes)
     mymap.drawmapboundary(fill_color='#46bcec')
     mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
     mymap.drawcoastlines()
-
-    # Draw neighborhood bounds
-    for hood in hood_map.neighborhoods:
-        lon,lat = hood.polygon.exterior.coords.xy
-        x,y = mymap(lon,lat)
-        mymap.plot(x,y,'-k',alpha=0.5)
+    drawNeighborhoods(mymap,hood_map)
 
     # Seperate dataframe into list of crime types
     crimeTypes = chicagoarea.crimes['Primary Type'].unique()
@@ -92,29 +85,17 @@ if __name__ == "__main__":
         x,y = mymap(lon,lat)
         mymap.plot(x, y, color=next(colors), linestyle='None', markersize=5, marker='o', alpha=0.7, label=data['Primary Type'].unique()[0])
     
-    # To animate it
-    #ani = animation.FuncAnimation(plt.gcf(), update, data_gen(chicagoarea.crimes), init_func=init, interval=50, blit=False, save_count=1000)
-    #ani.save('myanimation.gif',writer='imagemagick',fps=30)
+    drawRefPoints(mymap,refpoints)
+    
     plt.legend(loc='upper left',prop={'size':6}, numpoints=1)
     plt.savefig("chicagoCrimeMap_2016.png")
-    #plt.show()
 
     plt.clf()
-    mymap = Basemap(llcrnrlon=chicagoarea.crimes['Longitude'].min()-0.4,
-                llcrnrlat=chicagoarea.crimes['Latitude'].min(),
-                urcrnrlon=chicagoarea.crimes['Longitude'].max()+0.2,
-                urcrnrlat=chicagoarea.crimes['Latitude'].max()+0.2,
-                projection='lcc',lat_1=32,lat_2=45,lon_0=-95,
-                resolution = 'h')
+    mymap = getMap(chicagoarea.crimes)
     mymap.drawmapboundary(fill_color='#46bcec')
     mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
     mymap.drawcoastlines()
-    
-    # Draw neighborhood bounds
-    for hood in hood_map.neighborhoods:
-        lon,lat = hood.polygon.exterior.coords.xy
-        x,y = mymap(lon,lat)
-        mymap.plot(x,y,'-k',alpha=0.5)
+    drawNeighborhoods(mymap,hood_map)
 
     data = chicagoarea.crimes[:][chicagoarea.crimes['Primary Type'] == 'HOMICIDE']
     #x,y = mymap(0, 0)
@@ -122,8 +103,10 @@ if __name__ == "__main__":
     lat = data['Latitude'].values
     x,y = mymap(lon,lat)
     mymap.plot(x, y, color='r', linestyle='None', markersize=5, marker='o', alpha=1., label=data['Primary Type'].unique()[0])
+    drawRefPoints(mymap,refpoints)
     plt.legend(loc='upper left',prop={'size':6}, numpoints=1)
     plt.savefig("chicagoHomicideMap_2016.png")
+
 
     # For making neighborhood specific csv
     """
