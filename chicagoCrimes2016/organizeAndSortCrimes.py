@@ -62,10 +62,10 @@ if __name__ == "__main__":
                  ['Washington Heights',41.72, -87.65,-15,-15],['Clearing',41.78, -87.76,-60,-5],['Austin',41.9, -87.76,-50,-5],['Pilsen',41.85, -87.66,-20,-13],
                  ['New City',41.81, -87.66,-60,-3]]
     hood_map = neighborhoodize.NeighborhoodMap(neighborhoodize.zillow.ILLINOIS)
-    chicagoarea = crimes('ChicagoCrimes2016_Map_test.csv',hood_map)
-    #chicagoarea = crimes('ChicagoCrimes2016_Map.csv',hood_map)
+    #chicagoarea = crimes('ChicagoCrimes2016_Map_test.csv',hood_map)
+    chicagoarea = crimes('ChicagoCrimes2016_Map.csv',hood_map)
 
-    # Make a map
+    # Make a reference map
     fig = plt.figure()
     ax = fig.add_subplot(1, 1, 1)
     mymap = getMap(chicagoarea.crimes)
@@ -73,8 +73,16 @@ if __name__ == "__main__":
     mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
     mymap.drawcoastlines()
     drawNeighborhoods(mymap,hood_map)
-
-    # Seperate dataframe into list of crime types
+    drawRefPoints(mymap,refpoints)
+    plt.savefig("chicagoCrimeMap_Reference.png")
+    
+    # Make Map showing all crimes reported
+    plt.clf()
+    mymap = getMap(chicagoarea.crimes)
+    mymap.drawmapboundary(fill_color='#46bcec')
+    mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
+    mymap.drawcoastlines()
+    drawNeighborhoods(mymap,hood_map)
     crimeTypes = chicagoarea.crimes['Primary Type'].unique()
     colors = iter(cm.rainbow(np.linspace(0, 1, len(crimeTypes))))
     for crime in crimeTypes:
@@ -84,29 +92,27 @@ if __name__ == "__main__":
         lat = data['Latitude'].values
         x,y = mymap(lon,lat)
         mymap.plot(x, y, color=next(colors), linestyle='None', markersize=5, marker='o', alpha=0.7, label=data['Primary Type'].unique()[0])
-    
-    drawRefPoints(mymap,refpoints)
-    
     plt.legend(loc='upper left',prop={'size':6}, numpoints=1)
-    plt.savefig("chicagoCrimeMap_2016.png")
-
-    plt.clf()
-    mymap = getMap(chicagoarea.crimes)
-    mymap.drawmapboundary(fill_color='#46bcec')
-    mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
-    mymap.drawcoastlines()
-    drawNeighborhoods(mymap,hood_map)
-
-    data = chicagoarea.crimes[:][chicagoarea.crimes['Primary Type'] == 'HOMICIDE']
-    #x,y = mymap(0, 0)
-    lon = data['Longitude'].values
-    lat = data['Latitude'].values
-    x,y = mymap(lon,lat)
-    mymap.plot(x, y, color='r', linestyle='None', markersize=5, marker='o', alpha=1., label=data['Primary Type'].unique()[0])
-    drawRefPoints(mymap,refpoints)
-    plt.legend(loc='upper left',prop={'size':6}, numpoints=1)
-    plt.savefig("chicagoHomicideMap_2016.png")
-
+    plt.savefig("chicagoCrimeMap_ALLCRIMES_2016.png")
+    
+    # Make a map for each subdivision of crime type (as determined by Chicago PD)
+    colors = iter(cm.rainbow(np.linspace(0, 1, len(crimeTypes))))
+    for crime in crimeTypes:
+        plt.clf()
+        mymap = getMap(chicagoarea.crimes)
+        mymap.drawmapboundary(fill_color='#46bcec')
+        mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
+        mymap.drawcoastlines()
+        drawNeighborhoods(mymap,hood_map)
+        data = chicagoarea.crimes[:][chicagoarea.crimes['Primary Type'] == crime]
+        #x,y = mymap(0, 0)
+        lon = data['Longitude'].values
+        lat = data['Latitude'].values
+        x,y = mymap(lon,lat)
+        mymap.plot(x, y, color=next(colors), linestyle='None', markersize=5, marker='o', alpha=0.7, label=data['Primary Type'].unique()[0])
+        plt.legend(loc='upper left',prop={'size':6}, numpoints=1)
+        outname = "chicagoCrimeMap_"+str(data['Primary Type'].unique()[0])+"_2016.png"
+        plt.savefig(outname)
 
     # For making neighborhood specific csv
     """
