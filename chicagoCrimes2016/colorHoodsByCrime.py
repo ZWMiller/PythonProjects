@@ -43,13 +43,13 @@ def getMap(df):
                 urcrnrlat=df['Latitude'].max()+.025,
                 projection='lcc',lat_1=32,lat_2=45,lon_0=-95,
                 resolution = 'h')
-def drawNeighborhoods(mymap,hood_map,crime_counts,cmap,norm):
+def drawNeighborhoods(mymap,ax,hood_map,crime_counts,crime,cmap,norm):
     for hood in hood_map.neighborhoods:
         lon,lat = hood.polygon.exterior.coords.xy
         x,y = mymap(lon,lat)
         poly = Polygon(zip(x,y))
-        color = cmap(norm(crime_counts[hood.name]['VIOLENT CRIMES']))
-        patch = PolygonPatch(poly,facecolor=color, edgecolor='#111111', alpha=0.7)
+        color = cmap(norm(crime_counts[hood.name][crime]))
+        patch = PolygonPatch(poly,facecolor=color, edgecolor='#999999', alpha=0.9)
         ax.add_patch(patch)
         #print crime_counts[hood.name]['VIOLENT CRIMES'],norm(crime_counts[hood.name]['VIOLENT CRIMES']),color
 
@@ -58,62 +58,91 @@ def drawRefPoints(mymap,refpoints):
         name,lat,lon, offx, offy = town
         x,y = mymap(lon,lat)
         mymap.plot(x, y, 'ok')
-        plt.annotate(name, xy=(x,y), xytext=(offx,offy),textcoords='offset points')
+        plt.annotate(name, xy=(x,y), xytext=(offx,offy),textcoords='offset points',size=14)
+
+def get_list_of_crime_counts(crime_count, hood_map, crime):
+    num_crime = []
+    for h in hood_map.neighborhoods:
+        num_crime.append(crime_count[h.name][crime])
+    return num_crime
+
+def make_plot(crime_counts, crime, hood_map, df, title, label, filename):
+    print "Making plot for " + str(crime) + " in Chicago 2016"
+    number_of_crime = get_list_of_crime_counts(crime_counts, hood_map, crime)
+    fig = plt.figure()
+    fig.set_size_inches(18.5,10.5,forward=True)
+    ax = fig.add_subplot(111)
+    mymap = getMap(df.crimes)
+    mymap.drawmapboundary(fill_color='#46bcec')
+    mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
+    mymap.drawcoastlines()
+    ax.set_title(title)
+    cax = fig.add_axes([0.73,0.1,0.04,0.8])
+    cmap = cm.get_cmap('YlOrRd')
+    norm = Normalize(vmin=0, vmax=max(number_of_crime)+0.15*max(number_of_crime))
+    cb = ColorbarBase(cax, cmap=cmap, norm=norm)
+    drawNeighborhoods(mymap,ax,hood_map,crime_counts,crime,cmap,norm)
+    cb.set_label(label)
+    oname = filename+".png"
+    onameref = filename+"_RefTowns.png"
+    fig.savefig(oname,dpi=200)
+    plt.sca(ax)
+    drawRefPoints(mymap,refpoints)
+    fig.savefig(onameref,dpi=200)
+    print "Made " + oname
+    print "Made " + onameref
 
 
 """ Main """
 if __name__ == "__main__":
-    refpoints = [['Loop',41.883333, -87.633333,15,-3],['Wrigley Field',41.948, -87.656,15,-3],['O\'Hare',42, -87.92,-10,10],['Irving Park',41.95, -87.73,-20,10],
-                 ['Oakland',41.82, -87.6,15,-3],['Hyde Park',41.8, -87.59,15,-7],['West Lawn',41.77, -87.72,-5,5],['Calumet\nHeights',41.728333, -87.579722,15,-5],
-                 ['Washington\nHeights',41.72, -87.65,-15,-15],['Clearing',41.78, -87.76,-60,-5],['Austin',41.9, -87.76,-50,-5],['Pilsen',41.85, -87.66,-20,-13],
-                 ['New City',41.81, -87.66,-60,-3]]
+    refpoints = [['Loop',41.883333, -87.633333,20,-3],['Wrigley Field',41.948, -87.656,17,-3],['O\'Hare',42, -87.92,-10,10],['Irving Park',41.95, -87.73,-20,10],
+                 ['Oakland',41.82, -87.6,15,-3],['Hyde Park',41.8, -87.59,10,-7],['West Lawn',41.77, -87.72,-20,-20],['Calumet\nHeights',41.728333, -87.579722,-30,-30],
+                 ['Washington\nHeights',41.72, -87.65,-50,-30],['Clearing',41.78, -87.76,-70,-5],['Austin',41.9, -87.76,-60,-5],['Pilsen',41.85, -87.66,-20,-16],
+                 ['New City',41.81, -87.66,-75,-3],["Englewood",41.779786, -87.644778,0,-20]]
+    
+    """
+    Initialize neighborhood finder and dataframe with the data 
+    from Chicago's Open Data Portal
+    """
     hood_map = neighborhoodize.NeighborhoodMap(neighborhoodize.zillow.ILLINOIS)
     #ca = crimes('ChicagoCrimes2016_Map_test.csv',hood_map)
     ca = crimes('ChicagoCrimes2016_Map.csv',hood_map)
-
     neighborhoods = ca.crimes['Neighborhood'].unique()
     crimeTypes = ca.crimes['Primary Type'].unique()
+    
+    """
+    Create a dictionary that contains the counts of each crime type
+    by neighborhood. Any unknown neighborhods (bad longitude, latitude
+    associated with the crime report, not in a defined neighborhood, etc)
+    will be stored in 'Unknown' and not processed for mapping.
+    """
     crime_counts_by_neighborhood = {}
-    #for h in neighborhoods:
     for h in hood_map.neighborhoods:
         crime_counts_by_neighborhood.update({h.name: {}})
         for crime in crimeTypes:
             crime_counts_by_neighborhood[h.name].update({crime: 0}) 
+    
     crime_counts_by_neighborhood.update({'Unknown': {}})
     for crime in crimeTypes:
         crime_counts_by_neighborhood['Unknown'].update({crime: 0}) 
+
     for h,crime in zip(ca.crimes['Neighborhood'].values,ca.crimes['Primary Type'].values):
         crime_counts_by_neighborhood[h][crime] += 1
 
-    violent_crime_labels = ['BATTERY','ASSAULT','HOMICIDE','CRIM SEXUAL ASSAULT']
-    number_of_violent_crimes = []
+    """
+    Make a new label that combines the counts from all crimes 
+    considered violent by Chicago PD.
+    """
+    violent_crime_labels = ['HOMICIDE','ASSAULT','BATTERY','CRIM SEXUAL ASSAULT']
     for h in hood_map.neighborhoods:
         violent_crimes = 0
         for lbl in violent_crime_labels:
             violent_crimes += crime_counts_by_neighborhood[h.name][lbl]
         crime_counts_by_neighborhood[h.name].update({'VIOLENT CRIMES':violent_crimes})
-        number_of_violent_crimes.append(violent_crimes)
 
-    cmap = cm.get_cmap('YlOrRd')
-    norm = Normalize(vmin=0, vmax=max(number_of_violent_crimes))
-    
-    fig = plt.figure()
-    fig.set_size_inches(18.5,10.5,forward=True)
-    ax = fig.add_subplot(111)
-    mymap = getMap(ca.crimes)
-    mymap.drawmapboundary(fill_color='#46bcec')
-    mymap.fillcontinents(color='#f2f2f2',lake_color='#46bcec')
-    mymap.drawcoastlines()
-    ax.set_title("Violent Crimes in Chicago by Neighborhood")
-    cax = fig.add_axes([0.73,0.1,0.04,0.8])
-    cb = ColorbarBase(cax, cmap=cmap, norm=norm)
-    drawNeighborhoods(mymap,hood_map,crime_counts_by_neighborhood,cmap,norm)
-    cb.set_label("Number of Violent Crimes")
-    fig.savefig("violentCrimeHeatMap.png",dpi=200)
-    plt.sca(ax)
-    drawRefPoints(mymap,refpoints)
-    fig.savefig("violentCrimeHeatMap_RefTowns.png",dpi=200)
-
-    #for h in neighborhoods:
-    #    print "\n"+str(h)
-    #    print crime_counts_by_neighborhood[h]
+    """
+    Plot the result on a map, colorizing each neighborhood by the number of crimes. 
+    """
+    #make_plot(crime_counts_by_neighborhood,'VIOLENT CRIMES',hood_map,ca,"Violent Crimes in Chicago 2016","Number of Violent Crimes","violentCrimesChicago2016")
+    #make_plot(crime_counts_by_neighborhood,'MOTOR VEHICLE THEFT',hood_map,ca,"Vehicle Theft in Chicago 2016","Number of Vehicle Thefts","vehicleTheftsChicago2016")
+    make_plot(crime_counts_by_neighborhood,'HOMICIDE',hood_map,ca,"Homicides in Chicago 2016","Number of Homicides","homicidesChicago2016")

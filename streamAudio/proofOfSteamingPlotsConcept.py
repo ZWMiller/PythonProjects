@@ -13,7 +13,6 @@ def update():
     plt.pause(0.1)
 
 while True:
-    print "i"
     update()
 
 
