@@ -3,7 +3,7 @@
 These will be my forays into learning Python for data science. I'll track my
 projects here with a quick note on what each project does.
 
-##Twitter Counter
+## Twitter Counter
 
 This code connects to the Twitter API and searches for tweets based on a
 keyword provided by the user. It then gets the text of the tweets and counts
@@ -142,3 +142,14 @@ the mean value of the cluster. Then the image is reproduced with the new color
 scheme. The image manipulation is built on Python's PILLOW library.
 
 ![example of different color clusterings](readmeImages/sunsetclusters.gif)
+
+## Chicago Crime Map
+
+This was build as a foray into using GIS (Geographic Information Systems) data
+alongside a general interest in how crime changes per neighborhood in Chicago.
+Outputs are heat maps of crimes in 2016 Chicago database. Violent crimes are
+defined as homicide, assault, battery, and criminal sexual assault (the
+Chicago PD produces these labels). 
+
+![Neighborhoods colored by number of violent crimes in
+2016](readmeImages/chicagoCrimeExample.png)
