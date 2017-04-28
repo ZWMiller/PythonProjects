@@ -10,6 +10,7 @@ try:
 except:
     print "Something didn't import"
 
+p = pyaudio.PyAudio()
 i=0
 f,ax = plt.subplots(2)
 
@@ -20,7 +21,7 @@ y = np.random.randn(10000)
 # Plot 0 is for raw audio data
 li, = ax[0].plot(x, y)
 ax[0].set_xlim(0,1000)
-ax[0].set_ylim(-5000,5000)
+ax[0].set_ylim(-2,2)
 ax[0].set_title("Raw Audio Signal")
 # Plot 1 is for the FFT of the audio
 li2, = ax[1].plot(x, y)
@@ -31,28 +32,12 @@ ax[1].set_title("Fast Fourier Transform")
 plt.pause(0.01)
 plt.tight_layout()
 
-FORMAT = pyaudio.paInt16 # We use 16bit format per sample
-CHANNELS = 1
-RATE = 44100
-CHUNK = 1024 # 1024bytes of data red from a buffer
-RECORD_SECONDS = 0.1
-WAVE_OUTPUT_FILENAME = "file.wav"
-
-audio = pyaudio.PyAudio()
-
-# start Recording
-stream = audio.open(format=FORMAT,
-                    channels=CHANNELS,
-                    rate=RATE, 
-                    input=True)#,
-                    #frames_per_buffer=CHUNK)
-
 global keep_going
 keep_going = True
 
-def plot_data(in_data):
+def callback(in_data, frame_count, time_info, flag):
     # get and convert the data to float
-    audio_data = np.fromstring(in_data, np.int16)
+    audio_data = np.fromstring(in_data, dtype=np.int16)
     # Fast Fourier Transform, 10*log10(abs) is to scale it to dB
     # and make sure it's not imaginary
     dfft = 10.*np.log10(abs(np.fft.rfft(audio_data)))
@@ -70,9 +55,17 @@ def plot_data(in_data):
     # Show the updated plot, but without blocking
     plt.pause(0.01)
     if keep_going:
-        return True
+        return (audio_data, pyaudio.paContinue)
     else: 
-        return False
+        return (audio_data, pyaudio.paComplete)
+
+# This initializes the connection to the microphone, using pyAudio
+stream = p.open(format=pyaudio.paFloat32,
+                channels=1,
+                rate=44100,
+                output=False,
+                input=True,
+                stream_callback=callback)
 
 # Open the connection and start streaming the data
 stream.start_stream()
@@ -82,17 +75,15 @@ print "+---------------------------------+\n"
 
 # Loop so program doesn't end while the stream callback's 
 # itself for new data
-while keep_going:
+while stream.is_active():
     try:
-        plot_data(stream.read(CHUNK))
+        time.sleep(0.1)
     except KeyboardInterrupt:
         keep_going=False
-    except:
-        pass
 
 # Close up shop (currently not used because KeyboardInterrupt 
 # is the only way to close)
 stream.stop_stream()
 stream.close()
 
-audio.terminate()
+p.terminate()
