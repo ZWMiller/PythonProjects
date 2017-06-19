@@ -1,11 +1,8 @@
 try:
     import pyaudio
     import numpy as np
-    import pylab
     import matplotlib.pyplot as plt
     from scipy.io import wavfile
-    import time
-    import sys
     import seaborn as sns
 except:
     print "Something didn't import"
@@ -28,8 +25,9 @@ ax[1].set_xlim(0,5000)
 ax[1].set_ylim(-100,100)
 ax[1].set_title("Fast Fourier Transform")
 # Show the plot, but without blocking updates
-plt.pause(0.01)
 plt.tight_layout()
+plt.subplots_adjust(hspace=0.3)
+plt.pause(0.01)
 
 FORMAT = pyaudio.paInt16 # We use 16bit format per sample
 CHANNELS = 1
