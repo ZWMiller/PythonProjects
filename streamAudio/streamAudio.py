@@ -78,8 +78,7 @@ print "\n+---------------------------------+"
 print "| Press Ctrl+C to Break Recording |"
 print "+---------------------------------+\n"
 
-# Loop so program doesn't end while the stream callback's 
-# itself for new data
+# Loop so program doesn't end while the stream is open
 while keep_going:
     try:
         plot_data(stream.read(CHUNK))
@@ -88,8 +87,7 @@ while keep_going:
     except:
         pass
 
-# Close up shop (currently not used because KeyboardInterrupt 
-# is the only way to close)
+# Close up shop 
 stream.stop_stream()
 stream.close()
 
