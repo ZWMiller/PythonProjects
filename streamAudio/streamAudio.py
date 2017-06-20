@@ -29,10 +29,10 @@ plt.tight_layout()
 plt.subplots_adjust(hspace=0.3)
 plt.pause(0.01)
 
-FORMAT = pyaudio.paInt16 # We use 16bit format per sample
+FORMAT = pyaudio.paInt16 # We use 16 bit format per sample
 CHANNELS = 1
 RATE = 44100
-CHUNK = 1024 # 1024bytes of data red from a buffer
+CHUNK = 1024 # 1024 bytes of data read from the buffer
 RECORD_SECONDS = 0.1
 WAVE_OUTPUT_FILENAME = "file.wav"
 
