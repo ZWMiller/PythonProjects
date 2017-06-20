@@ -1,11 +1,11 @@
+from __future__ import print_function
 try:
     import pyaudio
     import numpy as np
     import matplotlib.pyplot as plt
-    from scipy.io import wavfile
     import seaborn as sns
 except:
-    print "Something didn't import"
+    print("Something didn't import")
 
 i=0
 f,ax = plt.subplots(2)
@@ -74,9 +74,9 @@ def plot_data(in_data):
 
 # Open the connection and start streaming the data
 stream.start_stream()
-print "\n+---------------------------------+"
-print "| Press Ctrl+C to Break Recording |"
-print "+---------------------------------+\n"
+print("\n+---------------------------------+")
+print("| Press Ctrl+C to Break Recording |")
+print( "+---------------------------------+\n")
 
 # Loop so program doesn't end while the stream is open
 while keep_going:
