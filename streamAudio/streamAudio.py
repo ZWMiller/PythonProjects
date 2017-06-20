@@ -38,7 +38,7 @@ WAVE_OUTPUT_FILENAME = "file.wav"
 
 audio = pyaudio.PyAudio()
 
-# start Recording
+# Claim the microphone
 stream = audio.open(format=FORMAT,
                     channels=CHANNELS,
                     rate=RATE, 
@@ -56,10 +56,6 @@ def plot_data(in_data):
     dfft = 10.*np.log10(abs(np.fft.rfft(audio_data)))
     
     # Force the new data into the plot, but without redrawing axes.
-    # If uses plt.draw(), axes are re-drawn every time
-    #print audio_data[0:10]
-    #print dfft[0:10]
-    #print
     li.set_xdata(np.arange(len(audio_data)))
     li.set_ydata(audio_data)
     li2.set_xdata(np.arange(len(dfft))*10.)
