@@ -153,3 +153,12 @@ Chicago PD produces these labels).
 
 ![Neighborhoods colored by number of violent crimes in
 2016](readmeImages/chicagoCrimeExample.png)
+
+## Streaming Audio
+
+To get some practice interfacing hardware with Python, I wrote a program that
+plots the current inputs into the microphone. It grabs control of the
+microphone, samples the input repeatedly, and draws the raw input and a
+Fourier transform of the data. 
+
+![Audio plotting with Python](readmeImages/voice_demo.gif)
