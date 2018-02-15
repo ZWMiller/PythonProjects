@@ -12,3 +12,5 @@ chicagoCrimes2016/*.csv
 chicagoCrimes2016/*.png
 chicagoCrimes2016/*/*.png
 imageFlattener/img/*
+betterSimulation/data/*
+**/.ipynb_checkpoints/*

@@ -1,0 +1,19 @@
+Data:
+
+ofs << eTrk->id()<<": " << vz << " " << pt << " " << eta << " " << dca << " "
+<< nHitsFit << " " << nHitsDedx << " " << nSigE << " " << pve << " " << zDist
+<< " " << phiDist << endl;
+
+
+Simu:
+
+outfile << t1geantId<<" "<<t1p<<" "<<t1pt<<" "<<t1svx<<" "<<t1svy<<"
+"<<t1svz<<" "<<pgeantId<<" "<<pmom<<" "<<pt<<" "<<t1phi<<" "<<t1y<<"
+"<<t1eta<<" "<<peta<<" "<<label<<" "<<rp<<" "<< rpt<<" "<< reta<<" "<< rphi<<"
+"<<nfit<<" "<< ncom<<" "<< nmax<<" "<< nDedxPts<<" "<<dedx<<" "<<dedx_2<<"
+"<<nSigPi<<" "<<nSigK<<" "<<nSigP<<" "<<nSigE<<" "<<vtx<<" "<< vty<<" "<<
+vtz<<" "<< bemcId<<" "<<btowId0<<" "<<adc0<<" "<<e[0]<<" "<<e[1]<<"
+"<<dist[0]<<" "<<dist[1]<<" "<<nhit[0]<<" "<<nhit[1]<<" "<<btowId<<"
+"<<dsmAdc[0]<<" "<<dsmAdc[2]<<" "<<(float)id1<<" "<<dsmAdc[1]<<" "<<dca<<" "<<
+t1pr_rp<<" "<< t1pr_rpT<<" "<< t1_stpcx<<" "<< t1_stpcy<<" "<< t1_stpcz <<
+endl;

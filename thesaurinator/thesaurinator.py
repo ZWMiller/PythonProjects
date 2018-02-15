@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys
 from nltk.corpus import wordnet as wn
 import random
