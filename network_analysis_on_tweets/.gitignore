@@ -1,0 +1,5 @@
+twitter_credentials.py
+**.DS_Store
+**__pycache__
+data/*
+.idea/*
