@@ -26,10 +26,11 @@ import json
 
 
 class MyListener(StreamListener):
-    def __init__(self):
+    def __init__(self, tweets_per_file=500):
         super().__init__()
         self.tweets_seen = 0
         self.current_file = 0
+        self.tweets_per_file = tweets_per_file
         self.file_to_write = None
         self.open_next_file()
 
@@ -37,7 +38,7 @@ class MyListener(StreamListener):
         if self.file_to_write:
             self.file_to_write.close()
 
-        file_name = "twitter_retweet_network_data{}.csv".format(self.current_file)
+        file_name = "data/twitter_retweet_network_data{}.csv".format(self.current_file)
         print("Opening File " + str(self.current_file))
         self.current_file += 1
         self.file_to_write = open(file_name, 'w')
@@ -51,7 +52,7 @@ class MyListener(StreamListener):
                     user_original = tweet['user']['name']
                     self.file_to_write.write(user_original+';,.'+tweet['retweeted_status']['user']['name']+'\n')
                     self.tweets_seen += 1
-                    if self.tweets_seen > 5000:
+                    if self.tweets_seen > self.tweets_per_file:
                         self.open_next_file()
                         self.tweets_seen = 0
                 except KeyError:
@@ -64,4 +65,4 @@ class MyListener(StreamListener):
 
 if __name__ == "__main__":
     twitter_stream = Stream(auth, MyListener())
-    twitter_stream.filter(track=['RT'])
+    twitter_stream.filter(track=['Trump', 'trump'])
