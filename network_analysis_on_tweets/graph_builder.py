@@ -77,11 +77,26 @@ def highlight_important_nodes(graph_object, positions, top_n_hubs=10):
     labels = {}
     important_nodes, degrees = zip(*get_hub_nodes(graph_object, top_n_hubs=top_n_hubs))
 
+    node_id = 0
+    node_id_to_label = {}
+    node_label_to_id = {}
     for node in graph_object.nodes():
         if node in important_nodes:
             labels[node] = node
+            node_id_to_label[node_id] = node
+            node_label_to_id[node] = node_id
+            node_id += 1
+
     network = nx.draw_networkx_nodes(graph_object, nodelist=labels.values(),
                     node_size=[20 * degree for degree in degrees],
                     pos=positions, node_color='b')
-    nx.draw_networkx_labels(important_nodes, positions, labels, font_size=12,
-                            font_color='k')
+    nx.draw_networkx_labels(important_nodes, positions, node_label_to_id, font_size=12,
+                            font_color='w')
+
+    textstr = '\n'.join(["{}: {}".format(idx, label) for idx, label in node_id_to_label.items()])
+    props = dict(boxstyle='round', facecolor='white', alpha=0.5)
+
+    # place a text box in upper left in axes coords
+    ax = plt.gca()
+    ax.text(0.05, 0.95, textstr, transform=ax.transAxes, fontsize=12,
+            verticalalignment='top', bbox=props)

@@ -1,5 +1,6 @@
 try:
     from requests_oauthlib import OAuth1
+    import os
 except ModuleNotFoundError:
     import sys
     import os
@@ -39,6 +40,10 @@ class MyListener(StreamListener):
             self.file_to_write.close()
 
         file_name = "data/twitter_retweet_network_data{}.csv".format(self.current_file)
+        if os.path.exists(file_name):
+            while os.path.exists(file_name):
+                self.current_file += 1
+                file_name = "data/twitter_retweet_network_data{}.csv".format(self.current_file)
         print("Opening File " + str(self.current_file))
         self.current_file += 1
         self.file_to_write = open(file_name, 'w')
