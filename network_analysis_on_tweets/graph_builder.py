@@ -1,5 +1,4 @@
 import networkx as nx
-import numpy as np
 from matplotlib import pyplot as plt
 import glob
 from cleaning_functions import clean_user_name
@@ -46,7 +45,8 @@ def draw_di_graph(graph_object, scale_by_degree=True):
     graph_object: networkx graph object (directional or non)
     scale_by_degree: bool, changes drawn size of nodes to scale
     by number of connections (if True)
-    return axis object from matplotlib
+
+    return: postion map, network plot, axis object from matplotlib
     """
     positions = nx.spring_layout(graph_object)
     if scale_by_degree:
@@ -67,6 +67,7 @@ def get_hub_nodes(graph_object, top_n_hubs=10):
 
     graph_object: networkx graph object (directional or non)
     top_n_hubs: number of nodenames to return
+
     return: list of node names and their degrees
     """
     degrees = nx.degree(graph_object)
@@ -74,6 +75,18 @@ def get_hub_nodes(graph_object, top_n_hubs=10):
     return sorted_degrees[:top_n_hubs]
 
 def highlight_important_nodes(graph_object, positions, top_n_hubs=10):
+    """
+    Given a graph object, this calculates the most important hubs,
+    colors them in a different color, adds a label to each node,
+    and makes a text box displaying the node name for each hub.
+
+    graph_object: networkx graph object(directional or non)
+    positions: Location map for nodes, based on one of the built in mappers
+    for networkx
+    top_n_hubs: Number of hubs to colorize and label
+
+    return: None
+    """
     labels = {}
     important_nodes, degrees = zip(*get_hub_nodes(graph_object, top_n_hubs=top_n_hubs))
 
