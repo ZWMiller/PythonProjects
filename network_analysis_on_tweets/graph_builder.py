@@ -53,12 +53,12 @@ def draw_di_graph(graph_object, scale_by_degree=True):
         d = nx.degree(graph_object)
         keys, degrees = zip(*d)
         network = nx.draw(graph_object, nodelist=keys,
-                          node_size=[20*degree for degree in degrees],
-                          pos=positions)
+                          node_size=[5*degree for degree in degrees],
+                          pos=positions, alpha=0.5, arrows=False)
     else:
-        network = nx.draw(graph_object, pos=positions, node_size=50)
+        network = nx.draw(graph_object, pos=positions, node_size=50, alpha=0.5)
     # labels =  nx.draw_networkx_labels(graph, pos=positions)
-    return plt.gca()
+    return positions, network, plt.gca()
 
 def get_hub_nodes(graph_object, top_n_hubs=10):
     """
@@ -72,3 +72,16 @@ def get_hub_nodes(graph_object, top_n_hubs=10):
     degrees = nx.degree(graph_object)
     sorted_degrees = sorted(degrees, key=lambda x: x[1], reverse=True)
     return sorted_degrees[:top_n_hubs]
+
+def highlight_important_nodes(graph_object, positions, top_n_hubs=10):
+    labels = {}
+    important_nodes, degrees = zip(*get_hub_nodes(graph_object, top_n_hubs=top_n_hubs))
+
+    for node in graph_object.nodes():
+        if node in important_nodes:
+            labels[node] = node
+    network = nx.draw_networkx_nodes(graph_object, nodelist=labels.values(),
+                    node_size=[20 * degree for degree in degrees],
+                    pos=positions, node_color='b')
+    nx.draw_networkx_labels(important_nodes, positions, labels, font_size=12,
+                            font_color='k')
