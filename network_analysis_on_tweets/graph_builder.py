@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 import glob
 from cleaning_functions import clean_user_name
 
+
 def build_graph_from_csvs(path, sep=";,.", num_files=None):
     """
     Given a series of CSVs in the format user1 -> user2
@@ -48,6 +49,7 @@ def draw_di_graph(graph_object, scale_by_degree=True):
 
     return: postion map, network plot, axis object from matplotlib
     """
+    plt.figure(dpi=150)
     positions = nx.spring_layout(graph_object)
     if scale_by_degree:
         d = nx.degree(graph_object)
@@ -56,8 +58,8 @@ def draw_di_graph(graph_object, scale_by_degree=True):
                           node_size=[5*degree for degree in degrees],
                           pos=positions, alpha=0.5, arrows=False)
     else:
-        network = nx.draw(graph_object, pos=positions, node_size=50, alpha=0.5)
-    # labels =  nx.draw_networkx_labels(graph, pos=positions)
+        network = nx.draw(graph_object, pos=positions, node_size=10, alpha=0.5)
+
     return positions, network, plt.gca()
 
 def get_hub_nodes(graph_object, top_n_hubs=10):
@@ -68,31 +70,35 @@ def get_hub_nodes(graph_object, top_n_hubs=10):
     graph_object: networkx graph object (directional or non)
     top_n_hubs: number of nodenames to return
 
-    return: list of node names and their degrees
+    return: list of node names and their degrees as tuple (name, degree)
     """
     degrees = nx.degree(graph_object)
     sorted_degrees = sorted(degrees, key=lambda x: x[1], reverse=True)
     return sorted_degrees[:top_n_hubs]
 
-def highlight_important_nodes(graph_object, positions, top_n_hubs=10):
+def highlight_important_nodes(graph_object, positions, hub_nodes=None, top_n_hubs=10):
     """
     Given a graph object, this calculates the most important hubs,
     colors them in a different color, adds a label to each node,
     and makes a text box displaying the node name for each hub.
 
     graph_object: networkx graph object(directional or non)
-    positions: Location map for nodes, based on one of the built in mappers
-    for networkx
+    positions: Location map for nodes, based on one of the built in mappers for networkx
     top_n_hubs: Number of hubs to colorize and label
 
     return: None
     """
-    labels = {}
-    important_nodes, degrees = zip(*get_hub_nodes(graph_object, top_n_hubs=top_n_hubs))
 
-    node_id = 0
+    # Figure out hub nodes if none are provided
+    if not hub_nodes:
+        hub_nodes = get_hub_nodes(graph_object, top_n_hubs=top_n_hubs)
+    important_nodes, metric_value = zip(*hub_nodes)
+
+    # Set up all the label dictionaries that networkx needs to properly id special nodes
+    node_id = 1
     node_id_to_label = {}
     node_label_to_id = {}
+    labels = {}
     for node in graph_object.nodes():
         if node in important_nodes:
             labels[node] = node
@@ -100,16 +106,16 @@ def highlight_important_nodes(graph_object, positions, top_n_hubs=10):
             node_label_to_id[node] = node_id
             node_id += 1
 
-    network = nx.draw_networkx_nodes(graph_object, nodelist=labels.values(),
-                    node_size=[20 * degree for degree in degrees],
-                    pos=positions, node_color='b')
+    # Drawing the special nodes to make them stand out
+    nx.draw_networkx_nodes(graph_object, nodelist=important_nodes,
+                           node_size=[10 * degree for degree in metric_value],
+                           pos=positions, node_color='b', edgecolors='k')
     nx.draw_networkx_labels(important_nodes, positions, node_label_to_id, font_size=12,
                             font_color='w')
 
-    textstr = '\n'.join(["{}: {}".format(idx, label) for idx, label in node_id_to_label.items()])
-    props = dict(boxstyle='round', facecolor='white', alpha=0.5)
-
     # place a text box in upper left in axes coords
+    textstr = '\n'.join(["{}: {}".format(idx+1, label) for idx, label in enumerate(important_nodes)])
+    props = dict(boxstyle='round', facecolor='white', alpha=0.5)
     ax = plt.gca()
     ax.text(0.05, 0.95, textstr, transform=ax.transAxes, fontsize=12,
             verticalalignment='top', bbox=props)

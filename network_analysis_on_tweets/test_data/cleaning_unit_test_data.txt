@@ -1,0 +1,5 @@
+Strange_caPiTals;,.Strange_caPiTals
+   front_spaces;,.front_spaces
+back_spaces   ;,.back_spaces
+middle spaces;,.middle spaces
+🇺🇸weird_characters🇺🇸;,.weird_characters
